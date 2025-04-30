@@ -7,5 +7,7 @@
 # IDE files and directories
 .idea/
 
+**/node_modules
+
 # Requests folder for testing api routes with vscode REST
 api/requests
