@@ -69,22 +69,13 @@ RUN npm install
 ENV NODE_ENV=production
 RUN npm run build
 
-###############################################################################
-# STAGE 4: final
-# - Setup NODE_ENV as an argument
-# - Install PM2 process manager
-# - Copy over all files needed at run-time
-# - Expose necessary ports
-# - Run as node (more secure than running as root)
-###############################################################################
 
 FROM base AS final
-
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
-
-RUN npm install -g pm2@5.3.0
-
+# RUN npm install -g pm2@5.3.0
+RUN npm install -g pm2
+# Copy in all runtime files
 COPY --chown=node:node --from=install_backend /usr/src/app/api /usr/src/app/api
 COPY --chown=node:node --from=install_frontend /usr/src/app/frontend/node_modules /usr/src/app/frontend/node_modules
 COPY --chown=node:node --from=build_frontend /usr/src/app/frontend/build /usr/src/app/frontend/build
@@ -93,7 +84,9 @@ COPY --chown=node:node ./frontend/.env* /usr/src/app/frontend/
 COPY --chown=node:node ./frontend/server.js /usr/src/app/frontend/
 COPY --chown=node:node ./pm2.config.js /usr/src/app/
 
+# API
 EXPOSE 3001
+# Frontend
 EXPOSE 9000
 
 USER node
