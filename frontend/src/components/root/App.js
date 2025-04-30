@@ -23,12 +23,12 @@ const App = ({ children }) => {
         Skip to main content
       </a>
       <Analytics gtmKey={process.env.REACT_APP_GTM_KEY} dapURL={process.env.REACT_APP_DAP_URL} />
-      <AhrqHeader />
+      {/* <AhrqHeader /> */}
       <CdsHeader />
       <Navbar isAuthenticated={isAuthenticated} />
       {children}
-      <CdsFooter />
-      <AhrqFooter />
+      {/* <CdsFooter /> */}
+      {/* <AhrqFooter /> */}
     </div>
   );
 };
