@@ -10,7 +10,7 @@
 #   common to all (or most?) environments.
 ###############################################################################
 
-FROM node:20-alpine AS base
+FROM node:23-alpine AS base
 
 ENV NODE_ENV=production
 
