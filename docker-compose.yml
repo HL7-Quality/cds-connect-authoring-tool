@@ -17,7 +17,7 @@ services:
       - cds-at-mongo
       - cds-at-cql2elm
   cds-at-mongo:
-    image: mongo:6.0
+    image: mongo:7
     ports:
       - "27017:27017"
   cds-at-cql2elm:

@@ -105,7 +105,7 @@ if (proxyActive) {
   app.use(process.env.REACT_APP_API_URL, proxy(`${apiHost}:${apiPort}`, proxyOptions));
 }
 
-app.get('/authoring/*', (req, res) => {
+app.get('/authoring/*splat', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'), {
     // Set to private and no-cache, which may be overkill for static content, but recommended by AHRQ
     headers: {
