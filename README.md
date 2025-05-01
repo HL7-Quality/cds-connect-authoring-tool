@@ -2,7 +2,9 @@
 
 The Clinical Decision Support (CDS) Authoring Tool is a web-based application aimed at simplifying the creation of production-ready clinical quality language (CQL) code. The project is based on "concept templates" (e.g. gender, HDL Cholesterol, etc.), which allow for additional clinical concepts to be included in the future. Concept modifiers are included to allow for more flexible definitions (e.g. most recent, value comparisons, etc.).
 
-The CDS Authoring Tool is part of the [CDS Connect](https://cds.ahrq.gov/cdsconnect) project, formally sponsored by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ) and initially developed under contract by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
+This self-hosted Community Edition was originally part of the [CDS Connect](https://cds.ahrq.gov/cdsconnect) project by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ) and initially developed under contract by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
+
+
 
 ## Contributions
 
@@ -17,80 +19,42 @@ This project uses the MERN stack: Mongo, Express, React, and NodeJS. The project
 
 For specific development details of each component, including configuration, see their respective README files.
 
-## Run (Development Quick Start)
+## Run From Source (Development Quick Start)
 
-### Prerequisites
+### First, Run MongoDB
 
-First, ensure you have [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/download-center/community) installed. The CDS Authoring Tool is tested using MongoDB 6.0.x, but later versions are expected to work.
-
-MongoDB can be run using a docker image if desired via
+To run from source you must you have [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/download-center/community) installed. MongoDB can be run using a container image via Docker, Podman etc if desired via:
 
 ```bash
 mkdir -p db
-docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:7 
+docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:8 
 ```
 
 This creates a local db directory and then runs a MongoDB docker container that will store files in that directory.
 
-### Install Dependencies
+### Configure Authentication
+
+User authentication is required to use most of the application. Local file authentication is used by default, and LDAP is also supported. For local development, the simplest approach is to use default [`local.json`](api/config/local.json) application configuration and [`local-users.json`](api/config//local-users.json) default username/password credentials as-is. Also see [`minimal-example.json`](api/config/minimal-example.json) and [`example-local-users.json`](api/config/example-local-users.json) for more complex examples.
+
+### Install Dependencies and Run
 
 Each of the subprojects (_api_ and _frontend_) must have the dependencies installed via _npm_. This can be done as follows:
 
-```bash
+```sh
 cd api
-npm install
+npm i # Install project dependencies
+npm run start # Run the Express API application
 ```
 
 After the api dependency install successfully runs, install the frontend dependencies:
 
-```bash
+```sh
 cd ../frontend
-npm install
+npm i # Install project dependencies
+npm run start # Run the React application
 ```
 
-After the frontend dependency install runs, go back to the root folder:
-
-```bash
-cd ..
-```
-
-### Configure Authentication
-
-The CDS Authoring Tool requires authentication. Currently LDAP authentication and local file authentication are supported. For local development, the simplest approach is to use local user authentication. To enable it, copy the minimal-example and example-local-users configuration files to `local.json` and `local-users.json`.
-
-_NOTE: The following example uses `cp`. If you are on Windows, use `copy` instead._
-
-```bash
-cp api/config/minimal-example.json api/config/local.json
-cp api/config/example-local-users.json api/config/local-users.json
-```
-
-This will enable the following two users:
-
-- User: `demo`, Password: `password`
-- User: `demo2`, Password: `password2`
-
-Of course, these default users and passwords should _never_ be enabled on a public-facing system.
-
-### Run the API and Frontend
-
-In one terminal, run the backend API server:
-
-```bash
-cd api
-npm start
-```
-
-In another terminal, run the frontend server:
-
-```bash
-cd frontend
-npm start
-```
-
-NOTE: Ensure MongoDB is running before starting the CDS Authoring Tool.
-
-When running, the Authoring Tool will be available at [http://localhost:3000/authoring](http://localhost:3000/authoring).
+The frontend should now be available at [http://localhost:3000/authoring](http://localhost:3000/authoring)!
 
 ### Testing CQL Execution Results
 
@@ -108,7 +72,7 @@ instance of the Translator:
 ```
 
 This should replace any existing cqlToElm configuration block where `active` is set to `false`. See
-the Configuration section of the [API README](api/README.md#configuration) for details on configuring the API.
+the Configuration section of the [API README](api/README.md) for details on configuring the API.
 
 Once the configuration is updated and the API has been restarted the translation service can be run
 locally in docker via:
@@ -143,46 +107,24 @@ To build the Docker image, execute the following command from the project's root
 docker build -t cdsauthoringtool .
 ```
 
-### Running the docker container
+### Running Everything with Docker Compose
 
-For the Authoring Tool to run in a docker container, MongoDB and CQL-to-ELM docker containers must be linked. The following commands run the necessary containers, with the required links and exposed ports:
+To run pre-build images For the Authoring Tool to run in a docker container, MongoDB and CQL-to-ELM docker containers must be linked. The following commands run the necessary containers, with the required links and exposed ports:
 
-```bash
-docker run --name cat-cql2elm -d cqframework/cql-translation-service:v2.3.0
-docker run --name cat-mongo -d mongo:6.0
-docker run --name cat \
-  --link cat-cql2elm:cql2elm \
-  --link cat-mongo:mongo \
-  -e "CQL_TO_ELM_URL=http://cql2elm:8080/cql/translator" \
-  -e "CQL_FORMATTER_URL=http://cql2elm:8080/cql/formatter" \
-  -e "MONGO_URL=mongodb://mongo/cds_authoring" \
-  -e "AUTH_SESSION_SECRET=secret" \
-  -e "AUTH_LDAP_URL=ldap://localhost:389" \
-  -e "AUTH_LDAP_BIND_DN=cn=root" \
-  -e "AUTH_LDAP_BIND_CREDENTIALS={{password}}" \
-  -e "AUTH_LDAP_SEARCH_BASE=ou=passport-ldapauth" \
-  -e "AUTH_LDAP_SEARCH_FILTER=(uid={{username}})" \
-  -e "NODE_ENV=development" \
-  -p "3001:3001" \
-  -p "9000:9000" \
-  cdsauthoringtool
+```sh
+docker compose -f docker-compose.yml up --remove-orphans --pull always
 ```
 
-To run the CDS Authoring Tool in a detached process, add a `-d` to the run command (before `cdsauthoringtool`).
-
-Of course you will need to modify some of the values above according to your environment (e.g., LDAP details).
 
 **Proxying the API**
 
-By default, the server on port 9000 will proxy requests on _/authoring/api_ to the local API server using express-http-proxy. In production environments, a dedicated external proxy server may be desired. In that case, the external proxy server will be responsible for proxying _/authoring/api_ to port 3001. To accomodate this, disable the express-http-proxy by adding this addition flag to the last command above:
+By default, the server on port 9000 will proxy requests on _/authoring/api_ to the local API server using express-http-proxy. In production environments, a dedicated external proxy server may be desired. In that case, the external proxy server will be responsible for proxying _/authoring/api_ to port 3001. To accomodate this, disable the express-http-proxy by adding `API_PROXY_ACTIVE=false` as a frontend environment variable.
 
-```
-  -e "API_PROXY_ACTIVE=false" \
-```
+
 
 **Enabling HTTPS**
 
-By default, the API server and frontend server listen over unsecure HTTP. To listen over HTTPS, add these three flags to the `docker run` command above:
+By default, the API server and frontend server listen over unsecure HTTP. To listen over HTTPS, add these three flags and volume mount settings to your `docker run` command:
 
 ```
   -v /data/ssl:/data/ssl \
@@ -193,45 +135,6 @@ By default, the API server and frontend server listen over unsecure HTTP. To lis
 
 You should substitute the volume mapping and SSL filenames as needed for your specific environment.
 
-**Using the Container**
-
-When the container is running, access the app at [http://localhost:9000](http://localhost:9000).
-
-To stop the container:
-
-```
-docker stop cat cat-mongo cat-cql2elm
-```
-
-To start the containers again:
-
-```
-docker start cat-cql2elm cat-mongo cat
-```
-
-To remove the containers (usually when building new images):
-
-```
-docker rm cat cat-mongo cat-cql2elm
-```
-
-**NOTE: This configuration stores data in Mongo's container. This means it is tied to the lifecycle of the mongo container and is _not_ persisted when the container is removed.**
-
-### Using Docker Compose
-
-Alternately, use Docker Compose to build and run all of the containers. Execute:
-
-```
-docker compose up
-```
-
-The first time, it will build the cdsauthoringtoolapi_cat and cdsauthoringtool_cat images. Subsequent times it may re-use the already built images. To force it to rebuild, pass in the `--build` flag.
-
-To stop _and remove_ the containers, run:
-
-```
-docker compose down
-```
 
 ## LICENSE
 
