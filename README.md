@@ -1,10 +1,8 @@
-# CDS Connect Authoring Tool
+# CDS Connect Authoring Tool :: Community Edition 
 
-## About
+The Clinical Decision Support (CDS) Authoring Tool is a web-based application aimed at simplifying the creation of production-ready clinical quality language (CQL) code. The project is based on "concept templates" (e.g. gender, HDL Cholesterol, etc.), which allow for additional clinical concepts to be included in the future. Concept modifiers are included to allow for more flexible definitions (e.g. most recent, value comparisons, etc.).
 
-The Clinical Decision Support (CDS) Authoring Tool is a web-based application aimed at simplifying the creation of production-ready CQL code. The project is based on "concept templates" (e.g. gender, HDL Cholesterol, etc.), which allow for additional clinical concepts to be included in the future. Concept modifiers are included to allow for more flexible definitions (e.g. most recent, value comparisons, etc.).
-
-The CDS Authoring Tool is part of the [CDS Connect](https://cds.ahrq.gov/cdsconnect) project, sponsored by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ), and initially developed under contract with AHRQ by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
+The CDS Authoring Tool is part of the [CDS Connect](https://cds.ahrq.gov/cdsconnect) project, formally sponsored by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ) and initially developed under contract by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
 
 ## Contributions
 
@@ -12,10 +10,10 @@ For information about contributing to this project, please see [CONTRIBUTING](CO
 
 ## Development Details
 
-This project uses the MERN stack: Mongo, Express, React, and NodeJS. The project is split into two components:
+This project uses the MERN stack: Mongo, Express, React, and NodeJS. The project is split into two components in separate directories:
 
-- [api](api): the backend Express API server
-- [frontend](frontend): the frontend React web application
+- [api](/api): the backend Express API server
+- [frontend](/frontend): the frontend React web application
 
 For specific development details of each component, including configuration, see their respective README files.
 
@@ -23,13 +21,13 @@ For specific development details of each component, including configuration, see
 
 ### Prerequisites
 
-First, ensure you have [Node.js LTS](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/download-center/community) installed. The CDS Authoring Tool is tested using MongoDB 6.0.x, but later versions are expected to work.
+First, ensure you have [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/download-center/community) installed. The CDS Authoring Tool is tested using MongoDB 6.0.x, but later versions are expected to work.
 
 MongoDB can be run using a docker image if desired via
 
 ```bash
 mkdir -p db
-docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:6.0
+docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:7 
 ```
 
 This creates a local db directory and then runs a MongoDB docker container that will store files in that directory.

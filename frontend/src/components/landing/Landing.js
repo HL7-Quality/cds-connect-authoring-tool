@@ -70,10 +70,10 @@ const Landing = () => {
             <div className={styles.homeCardTitle}>Transform</div>
 
             <div>
-              CDS Connect, sponsored by the{' '}
-              <Link external href="https://www.ahrq.gov/" text="Agency for Healthcare Research and Quality" />, aims to
-              offer a systematic and replicable process for transforming patient-centered outcomes research (PCOR)
-              findings into shareable standards-based CDS artifacts.
+              The Community Edition of the CDS Connect Authoring Tool is based on that originally sponsored by the{' '}
+              <Link external href="https://www.ahrq.gov/" text="Agency for Healthcare Research and Quality" />. It aims
+              to offer a systematic and replicable process for transforming patient-centered outcomes research (PCOR)
+              findings into shareable, standards-based CDS artifacts.
             </div>
           </div>
 
@@ -91,12 +91,12 @@ const Landing = () => {
               <Link
                 external
                 href="https://cql.hl7.org/"
-                text="Health Level Seven (HL7®) Clinical Quality Language (CQL) 1.3"
+                text="Health Level Seven (HL7®) Clinical Quality Language (CQL)"
               />{' '}
               artifacts using the HL7® Fast Healthcare Interoperability Resources (FHIR®){' '}
-              <Link external href="http://hl7.org/fhir/DSTU2/index.html" text="DSTU2" /> ,{' '}
+              <Link external href="http://hl7.org/fhir/R4/index.html" text="R4" />,{' '}
               <Link external href="http://hl7.org/fhir/STU3/index.html" text="STU3" /> , or{' '}
-              <Link external href="http://hl7.org/fhir/R4/index.html" text="R4" /> data model.
+              <Link external href="http://hl7.org/fhir/DSTU2/index.html" text="DSTU2" /> data model.
             </div>
           </div>
 
@@ -109,11 +109,9 @@ const Landing = () => {
 
             <div className={styles.homeCardTitle}>Share</div>
             <div>
-              CDS Connect provides a repository of CDS artifacts and a prototype infrastructure for sharing CDS across
-              different health care settings and technologies. The CDS Authoring Tool, along with the{' '}
-              <Link href="https://cds.ahrq.gov/cdsconnect" text="CDS Connect Repository" />, is designed to promote the
-              creation and use of CDS in everyday clinical settings, connecting high-quality CDS to the U.S. healthcare
-              community.
+              CDS artifacts may be exported for sharing across different health care settings and technologies. The
+              Authoring Tool is designed to promote the creation and use of CDS in everyday clinical settings,
+              connecting high-quality CDS to the U.S. healthcare community.
             </div>
           </div>
 
