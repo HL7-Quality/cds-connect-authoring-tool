@@ -5,9 +5,6 @@ import { getCurrentUser } from 'actions/auth';
 
 import { Analytics, Navbar } from 'components/base';
 import CdsHeader from 'components/header/CdsHeader';
-import AhrqHeader from 'components/header/AhrqHeader';
-import CdsFooter from 'components/footer/CdsFooter';
-import AhrqFooter from 'components/footer/AhrqFooter';
 
 const App = ({ children }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);

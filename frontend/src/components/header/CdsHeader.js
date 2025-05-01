@@ -1,11 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
 
 import { Login, Logout } from 'components/auth';
-import { Link } from 'components/elements';
 import darkTheme from 'styles/theme';
 
 const CdsHeader = () => {
