@@ -20,7 +20,7 @@
     "@mui/styles": "^5.16.6",
     "@mui/x-date-pickers": "^7.12.0",
     "axios": "^1.9.0",
-    "bootstrap": "^5.3.5",
+    "bootstrap": "^5.3.6",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "cql-exec-fhir": "^2.1.5",
@@ -82,7 +82,7 @@
     "redux-mock-store": "^1.5.4",
     "redux-test-utils": "^1.0.2",
     "sass": "^1.77.8",
-    "stylelint": "^16.19.1",
+    "stylelint": "^16.20.0",
     "stylelint-config-standard": "^38.0.0",
     "stylelint-config-standard-scss": "^14.0.0"
   },
