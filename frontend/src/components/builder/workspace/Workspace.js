@@ -119,7 +119,13 @@ const Workspace = () => {
       <div className={spacingStyles.globalPadding}>
         <div className={styles.workspace}>
           <WorkspaceHeader
-            handleDownloadArtifact={(artifact, dataModel) => invokeDownloadArtifact({ artifact, dataModel })}
+            handleDownloadArtifact={async (artifact, dataModel) => {
+              try {
+                await invokeDownloadArtifact({ artifact, dataModel });
+              } catch (error) {
+                console.error('Download artifact failed:', error);
+              }
+            }}
             handleSaveArtifact={handleSaveArtifact}
             statusMessage={statusMessage}
           />

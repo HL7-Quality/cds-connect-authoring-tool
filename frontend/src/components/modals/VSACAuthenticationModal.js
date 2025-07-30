@@ -25,13 +25,17 @@ const VSACAuthenticationModal = ({ handleCloseModal }) => {
     setApiKey('');
   }, [handleCloseModal]);
 
-  const login = useCallback(() => {
+  const login = useCallback(async () => {
     const apiKey = apiKeyRef.current;
 
-    mutateAsync({ apiKey }).then(() => {
-      dispatch(setVSACApiKey(apiKey));
-      closeModal();
-    });
+    try {
+      await mutateAsync({ apiKey }).then(() => {
+        dispatch(setVSACApiKey(apiKey));
+        closeModal();
+      });
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   }, [mutateAsync, apiKeyRef, dispatch, closeModal]);
 
   return (

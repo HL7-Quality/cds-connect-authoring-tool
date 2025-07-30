@@ -27,13 +27,43 @@ const Artifact = () => {
   const { mutateAsync: asyncDuplicateArtifact } = useMutation(duplicateArtifact, { onSuccess: resetArtifacts });
   const { mutateAsync: asyncUpdateArtifact } = useMutation(updateArtifact, { onSuccess: resetArtifacts });
   const handleDuplicateArtifact = useCallback(
-    artifactProps => asyncDuplicateArtifact({ artifactProps }),
+    async artifactProps => {
+      try {
+        await asyncDuplicateArtifact({ artifactProps });
+      } catch (error) {
+        console.error('Duplicate artifact failed:', error);
+      }
+    },
     [asyncDuplicateArtifact]
   );
-  const handleDeleteArtifact = useCallback(artifact => asyncDeleteArtifact({ artifact }), [asyncDeleteArtifact]);
-  const handleAddArtifact = useCallback(artifactProps => asyncAddArtifact({ artifactProps }), [asyncAddArtifact]);
+  const handleDeleteArtifact = useCallback(
+    async artifact => {
+      try {
+        await asyncDeleteArtifact({ artifact });
+      } catch (error) {
+        console.error('Delete artifact failed:', error);
+      }
+    },
+    [asyncDeleteArtifact]
+  );
+  const handleAddArtifact = useCallback(
+    async artifactProps => {
+      try {
+        await asyncAddArtifact({ artifactProps });
+      } catch (error) {
+        console.error('Add artifact failed:', error);
+      }
+    },
+    [asyncAddArtifact]
+  );
   const handleUpdateArtifact = useCallback(
-    (artifact, artifactProps) => asyncUpdateArtifact({ artifact, artifactProps }),
+    async (artifact, artifactProps) => {
+      try {
+        await asyncUpdateArtifact({ artifact, artifactProps });
+      } catch (error) {
+        console.error('Update artifact failed:', error);
+      }
+    },
     [asyncUpdateArtifact]
   );
 

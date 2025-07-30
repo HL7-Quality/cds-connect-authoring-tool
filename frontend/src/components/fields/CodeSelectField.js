@@ -32,12 +32,16 @@ const CodeSelectField = ({ namePrefix }) => {
   const fieldStyles = useFieldStyles();
   const styles = useStyles();
 
-  const handleValidateCode = useCallback(() => {
+  const handleValidateCode = useCallback(async () => {
     const { code, system } = fieldValuesRef.current;
 
     if (!system || !code || !vsacApiKey) return;
     const systemId = codeSystemOptions.find(({ value }) => value === system).id;
-    mutateAsync({ code, system: systemId, apiKey: vsacApiKey });
+    try {
+      await mutateAsync({ code, system: systemId, apiKey: vsacApiKey });
+    } catch (error) {
+      console.error('Validation failed:', error);
+    }
   }, [mutateAsync, fieldValuesRef, vsacApiKey]);
 
   const shouldReset =

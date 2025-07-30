@@ -25,7 +25,7 @@ const CodeSelectModal = ({ handleCloseModal, handleSelectCode, initialValue }) =
   const apiKey = useSelector(state => state.vsac.apiKey);
   const styles = useStyles();
 
-  const handleValidateCode = useCallback(() => {
+  const handleValidateCode = useCallback(async () => {
     const selectedCodeSystem = codeSystemRef.current;
     const system = selectedCodeSystem
       ? selectedCodeSystem === 'Other'
@@ -33,7 +33,11 @@ const CodeSelectModal = ({ handleCloseModal, handleSelectCode, initialValue }) =
         : codeSystemOptions.find(codeSystemOption => codeSystemOption.value === selectedCodeSystem).id
       : '';
 
-    mutateAsync({ code: codeRef.current, system, apiKey });
+    try {
+      await mutateAsync({ code: codeRef.current, system, apiKey });
+    } catch (error) {
+      console.error('Validation failed:', error);
+    }
   }, [apiKey, codeRef, codeSystemRef, otherCodeSystemRef, mutateAsync]);
 
   const handleSaveCodeSelection = useCallback(() => {

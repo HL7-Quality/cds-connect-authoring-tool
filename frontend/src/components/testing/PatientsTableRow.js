@@ -98,7 +98,13 @@ const PatientsTableRow = ({ isDisabled, isSelected, patient, togglePatient }) =>
           <DeleteConfirmationModal
             deleteType="patient"
             handleCloseModal={() => setConfirmDeleteModal(false)}
-            handleDelete={() => asyncDeletePatient({ patient })}
+            handleDelete={async () => {
+              try {
+                await asyncDeletePatient({ patient });
+              } catch (error) {
+                console.error('Delete patient failed:', error);
+              }
+            }}
           >
             <PatientCard patient={patient} />
           </DeleteConfirmationModal>

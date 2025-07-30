@@ -42,7 +42,7 @@ const Root = ({ store }) => (
                 <Route path="documentation/datatypes" element={<Documentation activeTab={2} />} />
                 <Route path="documentation/terms" element={<Documentation activeTab={3} />} />
                 <Route path="documentation" element={<Documentation />} />
-                <Route path="userguide" element={<Navigate to="documentation" replace />} />
+                <Route path="userguide" element={<Navigate to="/documentation" replace />} />
                 <Route path="*" element={<ErrorPage errorType="notFound" />} />
               </Routes>
             </App>

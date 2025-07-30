@@ -30,7 +30,11 @@ const ExternalCqlDropZone = () => {
   );
   const { mutateAsync: invokeSaveArtifact } = useMutation(saveArtifact);
   const handleSaveArtifact = useCallback(async () => {
-    invokeSaveArtifact({ artifact }, { onSuccess: data => dispatch(loadArtifact(data)) });
+    try {
+      await invokeSaveArtifact({ artifact }, { onSuccess: data => dispatch(loadArtifact(data)) });
+    } catch (error) {
+      console.error('Save artifact failed:', error);
+    }
   }, [invokeSaveArtifact, artifact, dispatch]);
   const addMutation = useMutation(addExternalCql, {
     onSuccess: message => {

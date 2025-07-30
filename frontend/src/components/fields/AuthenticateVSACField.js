@@ -18,12 +18,16 @@ const AuthenticateVSACField = () => {
   const { mutateAsync, isLoading, isError, isSuccess, reset } = useMutation(authenticateVSAC);
   const styles = useStyles();
 
-  const onLogin = useCallback(() => {
+  const onLogin = useCallback(async () => {
     const apiKey = apiKeyRef.current;
 
-    mutateAsync({ apiKey }).then(() => {
-      dispatch(setVSACApiKey(apiKey));
-    });
+    try {
+      await mutateAsync({ apiKey }).then(() => {
+        dispatch(setVSACApiKey(apiKey));
+      });
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   }, [apiKeyRef, mutateAsync, dispatch]);
 
   if (reduxApiKey) return null;

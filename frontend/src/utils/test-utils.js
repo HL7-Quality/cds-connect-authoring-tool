@@ -11,8 +11,8 @@ import { act, screen, fireEvent } from '@testing-library/react';
 import configureStore from '../store/configureStore';
 import lightTheme from 'styles/theme';
 
-const ProviderWrapper = ({ children }) => (
-  <MemoryRouter>
+const ProviderWrapper = ({ children, pathname }) => (
+  <MemoryRouter initialEntries={pathname ? [pathname] : undefined}>
     <Provider store={configureStore()}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <QueryClientProvider client={new QueryClient()}>
@@ -25,7 +25,13 @@ const ProviderWrapper = ({ children }) => (
   </MemoryRouter>
 );
 
-export const render = (ui, options) => testingLibRender(ui, { wrapper: ProviderWrapper, ...options });
+export const render = (ui, options = {}) => {
+  const { pathname, ...restOptions } = options;
+  return testingLibRender(ui, {
+    wrapper: props => <ProviderWrapper {...props} pathname={pathname} />,
+    ...restOptions
+  });
+};
 
 export const changeDate = async (value, index = 0) => {
   await act(async () => {
