@@ -33,7 +33,7 @@ Alternately, MongoDB can be installed and run using a docker image:
 
 ```bash
 mkdir -p db
-docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:6.0
+docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:8
 ```
 
 This creates a local db directory and then runs a MongoDB docker container that will store files in that directory.
@@ -47,7 +47,7 @@ npm install # installs this app's dependencies based on this project's package.j
 By default, the project will attempt to convert CQL to ELM on download. To disable this in development, see the configuration section below. If enabled, you will need the CQL-to-ELM translation service, a Java application that can be run locally via Maven or Docker.
 
 - To run locally with Maven: https://github.com/cqframework/cql-translation-service
-- To run locally with Docker, install Docker and run: `docker run -p 8080:8080 cqframework/cql-translation-service:v2.3.0`
+- To run locally with Docker, install Docker and run: `docker run -p 8080:8080 cqframework/cql-translation-service:v2.6.0`
 
 ### Add / Remove / Adjust dependencies
 

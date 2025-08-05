@@ -78,7 +78,7 @@ Once the configuration is updated and the API has been restarted the translation
 locally in docker via:
 
 ```bash
-docker run -p 8080:8080 cqframework/cql-translation-service:v2.3.0
+docker run -p 8080:8080 cqframework/cql-translation-service:v2.6.0
 ```
 
 ### Running tests

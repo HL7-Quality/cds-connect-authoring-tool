@@ -11,3 +11,7 @@
 
 # Requests folder for testing api routes with vscode REST
 api/requests
+
+# Common MongoDB development database directories
+db
+api/db
