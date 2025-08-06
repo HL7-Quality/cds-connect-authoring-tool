@@ -23,3 +23,8 @@ dependencies are currently fixed to older versions:
 - **postcss**: postcss is fixed to the latest version while other packages still require older version.
 - **react-side-effect**: react-side-effect is updated to the latest patch version in the overrides list because `react-helmet` requires an older version of `react-side-effects` that causes a conflicting peer dependency error.
   If `react-helmet` updates the version of `react-side-effects` it uses, this can be safely removed.
+
+## August 2025 Upgrades
+| Dependency | Current Version | Prior Version | Notes |
+|----|----|----|----|
+| | | | |
