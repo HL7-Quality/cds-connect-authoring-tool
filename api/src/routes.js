@@ -50,7 +50,7 @@ module.exports = app => {
   app.use('/authoring/api/settings', userSettingsRouter);
 
   // Catch all other Api calls
-  app.get('/authoring/api/*', (req, res) => {
+  app.get('/authoring/api/{*wildcard}', (req, res) => {
     res.sendStatus(404);
   });
 };

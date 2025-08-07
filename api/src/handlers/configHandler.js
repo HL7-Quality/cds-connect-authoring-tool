@@ -36,13 +36,17 @@ function getValueSets(request, result) {
 // Returns the nested ValueSet specified by the remaining path of the route
 function getOneValueSet(request, result) {
   // Gets the ValueSet category specified
-  let selectedObject = ValueSets[request.params.valueset];
-  if (selectedObject === undefined) {
-    result.status(404).send('This level of ValueSet does not exists');
-  }
+  // let selectedObject = ValueSets[request.params.valueset];
+  // console.log('selectedObject', selectedObject);
+  // if (selectedObject === undefined) {
+  //   result.status(404).send('This level of ValueSet does not exists');
+  // }
 
   // Gets the nested ValueSet as deep as specified
-  const path = request.params['0'].split('/');
+  // const path = request.params['0'].split('/');
+  const path = request.params.valueset;
+  // console.log('path', path);
+  let selectedObject = ValueSets;
   for (let i = 0; i < path.length; i++) {
     const variable = path[i];
     if (variable !== '') {
