@@ -5,9 +5,6 @@ In some cases, however, this is not feasible or does not provide sufficient
 return on the necessary investment to do a major version upgrade. The following
 dependencies are currently fixed to older versions:
 
-- **react** and **react-dom**: Upgraded
-- **react-router-dom**: Upgraded
-- **@testing-library/react**: Upgraded
 - **react-redux**, **redux**, and **redux-thunk**: The latest Redux stack requires React 18.
 - **axios**: Axios is currently tracking the latest version, but it requires the `transformIgnorePatterns` in the Jest configuration in `package.json`. This should be monitored to see if Axios, Jest, or react-scripts update to support this natively. If so, the full `"jest"` property in `package.json` can be removed safely.
 - **tocbot**: Tocbot is currently fixed to `v4.17.3` (or other patch versions) in order to avoid multiple errors logged to the console. In this version, and all previous versions, there is only one error logged when navigating away from the Documentation page.
@@ -22,9 +19,17 @@ dependencies are currently fixed to older versions:
   If/When react-scripts updates to address the vulnerability, this override can be safely removed.
 - **postcss**: postcss is fixed to the latest version while other packages still require older version.
 - **react-side-effect**: react-side-effect is updated to the latest patch version in the overrides list because `react-helmet` requires an older version of `react-side-effects` that causes a conflicting peer dependency error.
-  If `react-helmet` updates the version of `react-side-effects` it uses, this can be safely removed.
+If `react-helmet` updates the version of `react-side-effects` it uses, this can be safely removed.
 
 ## August 2025 Upgrades
 | Dependency | Current Version | Prior Version | Notes |
 |----|----|----|----|
-| | | | |
+| React | 18.3.1 | 17.0.2 | [React 18 Upgrade Guide](https://react.dev/blog/2022/03/08/react-18-upgrade-guide) - Concurrent features, automatic batching, new APIs |
+| React DOM | 18.3.1 | 17.0.2 | [Replaced Render with Create Root](https://react.dev/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis) |
+| React Router DOM | 6.22.0 | 5.3.4 | [React Router v6 Upgrade Guide](https://reactrouter.com/en/main/upgrading/v5) - useNavigate replaces useHistory, Routes replaces Switch, element replaces component |
+| React Redux | 8.1.3 | 8.1.3 | To assess |
+| React Tabs | 6.1.0 | 4.3.0 | [React Tabs v6 Breaking Changes](https://github.com/reactjs/react-tabs/blob/master/CHANGELOG.md) - New API, requires React 18 |
+| React Helmet | Removed | 6.1.0 | Replaced with React Helmet Async with better support for React 18 concurrent features |
+| React Helmet Async | | New | |
+| @testing-library/react | 15.0.6 | 12.1.5 | [Testing Library v13+ Breaking Changes](https://github.com/testing-library/react-testing-library/blob/main/CHANGELOG.md) - Requires React 18, new render API |
+| React Scripts | 5.0.1 | 5.0.1 | To assess|
