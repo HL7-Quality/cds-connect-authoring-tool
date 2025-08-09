@@ -1,7 +1,7 @@
-const mm = require('migrate-mongo');
-const config = require('./migrate-mongo-config');
+import mm from 'migrate-mongo';
+import config from './migrate-mongo-config.js';
 
-module.exports = async function migrate() {
+export default async function migrate() {
   mm.config.set(config);
   return mm.database
     .connect()

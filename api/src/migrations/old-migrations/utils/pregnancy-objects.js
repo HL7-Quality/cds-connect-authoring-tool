@@ -816,7 +816,7 @@ const notPregnantCMS347v1 = {
   ]
 };
 
-module.exports = {
+export {
   pregnant,
   notPregnant,
   pregnantCMS347v1,

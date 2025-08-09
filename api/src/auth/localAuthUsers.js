@@ -1,11 +1,13 @@
-const path = require('path');
+import path from 'path';
+import fs from 'fs';
 
 // Load the username/passwords that will be authenticated using the local authentication strategy
 let users = {};
 try {
-  users = require(path.join(process.cwd(), 'config', 'local-users.json'));
+  const userData = fs.readFileSync(path.join(process.cwd(), 'config', 'local-users.json'), 'utf8');
+  users = JSON.parse(userData);
 } catch (err) {
-  if (err.code === 'MODULE_NOT_FOUND') {
+  if (err.code === 'ENOENT') {
     console.log('No users specified.');
   }
 }
@@ -23,6 +25,4 @@ function findByUsername(name, cb) {
   return cb(null, null);
 }
 
-module.exports = {
-  findByUsername
-};
+export { findByUsername };

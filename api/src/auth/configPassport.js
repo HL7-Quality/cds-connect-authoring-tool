@@ -1,17 +1,17 @@
-const fs = require('fs');
-const process = require('process');
-const session = require('express-session');
-const passport = require('passport');
-const LdapStrategy = require('passport-ldapauth');
-const LocalStrategy = require('passport-local').Strategy;
-const MongoStore = require('connect-mongo');
-const { cloneDeep } = require('lodash');
-const config = require('../config');
-const findLocalUserById = require('./localAuthUsers').findByUsername;
+import fs from 'fs';
+import process from 'process';
+import session from 'express-session';
+import passport from 'passport';
+import LdapStrategy from 'passport-ldapauth';
+import LocalStrategy from 'passport-local';
+import MongoStore from 'connect-mongo';
+import _ from 'lodash';
+import config from '../config.js';
+import { findByUsername as findLocalUserById } from './localAuthUsers.js';
 
 function getLdapConfiguration(req, callback) {
   // Replace {{username}} and {{password}} with values from request
-  const ldapConfig = cloneDeep(config.get('auth.ldap'));
+  const ldapConfig = _.cloneDeep(config.get('auth.ldap'));
   if (ldapConfig && ldapConfig.server) {
     const server = ldapConfig.server;
     Object.keys(server).forEach(key => {
@@ -56,7 +56,7 @@ function getLocalConfiguration(username, password, done) {
   });
 }
 
-module.exports = app => {
+export default app => {
   // Configuring cookie security as suggested at: https://github.com/expressjs/session#cookiesecure
   const sess = {
     secret: config.get('auth.session.secret'),
@@ -79,7 +79,7 @@ module.exports = app => {
 
   // Configure authentication using Passport Local Strategy - enabled based on configuration
   if (config.get('auth.local.active')) {
-    passport.use(new LocalStrategy(getLocalConfiguration));
+    passport.use(new LocalStrategy.Strategy(getLocalConfiguration));
   }
 
   app.use(passport.initialize());

@@ -1,5 +1,5 @@
-const express = require('express');
-const cql = require('../handlers/cqlHandler');
+import express from 'express';
+import cql from '../handlers/cqlHandler.js';
 
 const CQLRouter = express.Router();
 
@@ -9,4 +9,4 @@ CQLRouter.route('/').post(cql.objToZippedCql);
 CQLRouter.route('/validate').post(cql.objToELM);
 CQLRouter.route('/viewCql').post(cql.objToViewableCql);
 
-module.exports = CQLRouter;
+export default CQLRouter;

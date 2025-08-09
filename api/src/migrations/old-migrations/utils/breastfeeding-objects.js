@@ -816,7 +816,7 @@ const notBreastfeedingCMS347v1 = {
   ]
 };
 
-module.exports = {
+export {
   breastfeeding,
   notBreastfeeding,
   breastfeedingCMS347v1,
