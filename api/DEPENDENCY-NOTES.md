@@ -1,6 +1,6 @@
 # Dependency Notes
 
-TODO @preston Update from CommonJS-to-ECMAScript Module upgrade
+TODO Preston Lee Update from CommonJS-to-ECMAScript Module upgrade
 
 
 Where possible, dependencies are frequently updated to their latest versions.

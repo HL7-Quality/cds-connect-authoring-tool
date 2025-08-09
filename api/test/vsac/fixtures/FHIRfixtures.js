@@ -421,7 +421,7 @@ const Code = {
   ]
 };
 
-module.exports = {
+export {
   Search,
   SearchWithPurpose,
   ValueSet,

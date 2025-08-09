@@ -1,14 +1,23 @@
-const fs = require('fs');
-const path = require('path');
-const unzipper = require('unzipper');
-const request = require('supertest');
-const sandbox = require('sinon').createSandbox();
+import fs from 'fs';
+import path from 'path';
+import unzipper from 'unzipper';
+import request from 'supertest';
+import sinon from 'sinon';
+
+const sandbox = sinon.createSandbox();
 const { fake, mock, replace, match } = sandbox;
-const { setupExpressApp, importChaiExpect } = require('../utils');
-const Artifact = require('../../src/models/artifact');
-const cqlHandler = require('../../src/handlers/cqlHandler');
-const CQLLibrary = require('../../src/models/cqlLibrary');
-const SimpleArtifact = require('./fixtures/SimpleArtifact.json');
+
+import { setupExpressApp, importChaiExpect } from '../utils.js';
+import Artifact from '../../src/models/artifact.js';
+import * as cqlHandler from '../../src/handlers/cqlHandler.js';
+import CQLLibrary from '../../src/models/cqlLibrary.js';
+// import SimpleArtifact from './fixtures/SimpleArtifact.json' with { type: 'json' };
+import { fileURLToPath } from 'url';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const SimpleArtifact = JSON.parse(fs.readFileSync(path.join(dirname, './fixtures/SimpleArtifact.json'), 'utf8'));
+
 const simpleArtifactWithDataModel = Object.assign({ dataModel: { name: 'FHIR', version: '4.0.1' } }, SimpleArtifact);
 
 // TODO: Tests for artifacts with external CQL libraries
@@ -337,7 +346,7 @@ function mockMakeCQLtoELMRequestForSimpleArtifact(includeXML = true, err) {
       formats.forEach(format => {
         results.push({
           name,
-          content: fs.readFileSync(path.join(__dirname, 'fixtures', `${name}.elm.${format}`), 'utf-8')
+          content: fs.readFileSync(path.join(dirname, 'fixtures', `${name}.elm.${format}`), 'utf-8')
         });
       });
     });
@@ -371,7 +380,7 @@ function mockFormatCQLForSimpleArtifact(err) {
     'formatCQL',
     mock('formatCQL')
       .withArgs(match('library "SimpleArtifact"'))
-      .yields(err, err ? undefined : fs.readFileSync(path.join(__dirname, 'fixtures', 'SimpleArtifact.cql'), 'utf-8'))
+      .yields(err, err ? undefined : fs.readFileSync(path.join(dirname, 'fixtures', 'SimpleArtifact.cql'), 'utf-8'))
   );
 }
 
