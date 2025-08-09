@@ -7,9 +7,11 @@ import sinon from 'sinon';
 const sandbox = sinon.createSandbox();
 const { fake, mock, replace, match } = sandbox;
 
+import * as cqlHandler from '../../src/handlers/cqlHandler.js';
+// const { __Rewire__, __ResetDependency__ } = cqlHandler;
+
 import { setupExpressApp, importChaiExpect } from '../utils.js';
 import Artifact from '../../src/models/artifact.js';
-import * as cqlHandler from '../../src/handlers/cqlHandler.js';
 import CQLLibrary from '../../src/models/cqlLibrary.js';
 // import SimpleArtifact from './fixtures/SimpleArtifact.json' with { type: 'json' };
 import { fileURLToPath } from 'url';
@@ -375,6 +377,9 @@ function mockArtifactFindOneForSimpleArtifact(err) {
 }
 
 function mockFormatCQLForSimpleArtifact(err) {
+  // const stub = sinon.stub().returns(fs.readFileSync(path.join(dirname, 'fixtures', 'SimpleArtifact.cql'), 'utf-8'));
+  // cqlHandler.__Rewire__('formatCQL', (cqlText, callback) => {fs.readFileSync(path.join(dirname, 'fixtures', 'SimpleArtifact.cql'), 'utf-8')});
+  sandbox.stub(cqlHandler, 'formatCQL').returns(function() {});
   replace(
     cqlHandler,
     'formatCQL',

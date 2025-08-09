@@ -1,14 +1,15 @@
-const path = require('path');
-const rewire = require('rewire');
-const sinon = require('sinon');
-const { importChaiExpect } = require('../utils');
+import path from 'path';
+import sinon from 'sinon';
+import { importChaiExpect } from '../utils.js';
+
+// import {getLdapConfiguration, getLocalConfiguration} from '../../src/auth/configPassport.js';
+import * as configPassport from '../../src/auth/configPassport.js';
+
 
 // rewire configPassport so we can set private module variables
-const configPassport = rewire('../../src/auth/configPassport');
-// eslint-disable-next-line no-underscore-dangle
-const getLdapConfiguration = configPassport.__get__('getLdapConfiguration');
-// eslint-disable-next-line no-underscore-dangle
-const getLocalConfiguration = configPassport.__get__('getLocalConfiguration');
+// // const configPassport = configPassportModule.__Rewire__(); 
+// const getLdapConfiguration = configPassport.__GetDependency__('getLdapConfiguration');
+// const getLocalConfiguration = configPassport.__GetDependency__('getLocalConfiguration');
 
 describe('configPassport', () => {
   let expect;
@@ -40,7 +41,7 @@ describe('configPassport', () => {
 
     it('should replace the LDAP username and password placeholders with values from the request', done => {
       const req = { body: { username: 'bob', password: 'lemoncurd' } };
-      getLdapConfiguration(req, (err, ldapConfig) => {
+      configPassport.getLdapConfiguration(req, (err, ldapConfig) => {
         expect(err).to.be.null;
         expect(ldapConfig).to.eql({
           active: true,
@@ -58,7 +59,7 @@ describe('configPassport', () => {
 
     it('should replace the LDAP username and password placeholders with values from the request that have special characters', done => {
       const req = { body: { username: 'bob\\bob', password: '"lemon" curd' } };
-      getLdapConfiguration(req, (err, ldapConfig) => {
+      configPassport.getLdapConfiguration(req, (err, ldapConfig) => {
         expect(err).to.be.null;
         expect(ldapConfig).to.eql({
           active: true,
@@ -80,7 +81,7 @@ describe('configPassport', () => {
         rejectUnauthorized: true
       };
       const req = { body: { username: 'bob', password: 'lemoncurd' } };
-      getLdapConfiguration(req, (err, ldapConfig) => {
+      configPassport.getLdapConfiguration(req, (err, ldapConfig) => {
         expect(err).to.be.null;
         expect(ldapConfig.server.tlsOptions).to.eql({
           ca: [Buffer.from('Fake Cert One', 'utf-8'), Buffer.from('Fake Cert Two', 'utf-8')],
@@ -96,7 +97,7 @@ describe('configPassport', () => {
         rejectUnauthorized: true
       };
       const req = { body: { username: 'bob', password: 'lemoncurd' } };
-      getLdapConfiguration(req, (err, ldapConfig) => {
+      configPassport.getLdapConfiguration(req, (err, ldapConfig) => {
         expect(err).to.be.null;
         expect(ldapConfig.server.tlsOptions).to.eql({
           ca: [Buffer.from('Fake Cert One', 'utf-8')],
@@ -112,7 +113,7 @@ describe('configPassport', () => {
       const findLocalUserById = sinon.fake.yields(null, { username: 'bob', password: 'lemoncurd' });
       // eslint-disable-next-line no-underscore-dangle
       configPassport.__set__({ findLocalUserById });
-      getLocalConfiguration('bob', 'lemoncurd', (err, user) => {
+      configPassport.getLocalConfiguration('bob', 'lemoncurd', (err, user) => {
         expect(findLocalUserById.calledWith('bob')).to.be.true;
         expect(err).to.be.null;
         expect(user).to.eql({ username: 'bob', password: 'lemoncurd' });
@@ -124,7 +125,7 @@ describe('configPassport', () => {
       const findLocalUserById = sinon.fake.yields(null, { username: 'bob', password: 'lemoncurd' });
       // eslint-disable-next-line no-underscore-dangle
       configPassport.__set__({ findLocalUserById });
-      getLocalConfiguration('bob', 'lemonyogurt', (err, user) => {
+      configPassport.getLocalConfiguration('bob', 'lemonyogurt', (err, user) => {
         expect(findLocalUserById.calledWith('bob')).to.be.true;
         expect(err).to.be.null;
         expect(user).to.be.false;
@@ -136,7 +137,7 @@ describe('configPassport', () => {
       const findLocalUserById = sinon.fake.yields(null, null);
       // eslint-disable-next-line no-underscore-dangle
       configPassport.__set__({ findLocalUserById });
-      getLocalConfiguration('bob', 'lemoncurd', (err, user) => {
+      configPassport.getLocalConfiguration('bob', 'lemoncurd', (err, user) => {
         expect(findLocalUserById.calledWith('bob')).to.be.true;
         expect(err).to.be.null;
         expect(user).to.be.false;
@@ -148,7 +149,7 @@ describe('configPassport', () => {
       const findLocalUserById = sinon.fake.yields('oopsy', null);
       // eslint-disable-next-line no-underscore-dangle
       configPassport.__set__({ findLocalUserById });
-      getLocalConfiguration('bob', 'lemoncurd', (err, user) => {
+      configPassport.getLocalConfiguration('bob', 'lemoncurd', (err, user) => {
         expect(findLocalUserById.calledWith('bob')).to.be.true;
         expect(err).to.equal('oopsy');
         expect(user).to.be.undefined;

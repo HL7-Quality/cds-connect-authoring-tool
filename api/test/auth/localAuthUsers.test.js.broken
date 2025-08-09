@@ -1,16 +1,17 @@
-const rewire = require('rewire');
-const { importChaiExpect } = require('../utils');
+import { importChaiExpect } from '../utils.js';
 
 // rewire localAuthUsers so we can set private module variables
-const localAuthUsers = rewire('../../src/auth/localAuthUsers');
+// const localAuthUsers = rewire('../../src/auth/localAuthUsers');
+import { findByUsername, __RewireAPI__ as localAuthUsersAPI} from '../../src/auth/localAuthUsers.js';
+
 // eslint-disable-next-line no-underscore-dangle
-localAuthUsers.__set__({
+localAuthUsersAPI.__set__({
   // Since the users get set from a local file relative to the working directory,
   // there isn't a good way to override that, so just set these vars directly
   users: { bob: 'p@$$w0rd!', sue: '1l0v3h0r$3$!' },
   userNames: ['bob', 'sue']
 });
-const findByUsername = localAuthUsers.findByUsername;
+// const findByUsername = localAuthUsers.findByUsername;
 
 describe('localAuthUsers', () => {
   let expect;
