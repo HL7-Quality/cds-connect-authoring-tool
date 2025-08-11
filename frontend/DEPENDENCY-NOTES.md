@@ -17,6 +17,7 @@ dependencies are currently fixed to older versions:
 
 - **nth-check**: nth-check is updated to the latest major version in the overrides list because `react-scripts` has dependencies that require a version with a vulnerability.
   If/When react-scripts updates to address the vulnerability, this override can be safely removed.
+- **postcss**: postcss is fixed to the latest version while other packages still require older version.
 
 ## August 2025 Upgrades
 
