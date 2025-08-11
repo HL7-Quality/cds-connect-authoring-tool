@@ -17,9 +17,6 @@ dependencies are currently fixed to older versions:
 
 - **nth-check**: nth-check is updated to the latest major version in the overrides list because `react-scripts` has dependencies that require a version with a vulnerability.
   If/When react-scripts updates to address the vulnerability, this override can be safely removed.
-- **postcss**: postcss is fixed to the latest version while other packages still require older version.
-- **react-side-effect**: react-side-effect is updated to the latest patch version in the overrides list because `react-helmet` requires an older version of `react-side-effects` that causes a conflicting peer dependency error.
-If `react-helmet` updates the version of `react-side-effects` it uses, this can be safely removed.
 
 ## August 2025 Upgrades
 | Dependency | Current Version | Prior Version | Notes |
@@ -30,6 +27,6 @@ If `react-helmet` updates the version of `react-side-effects` it uses, this can 
 | React Redux | 8.1.3 | 8.1.3 | To assess |
 | React Tabs | 6.1.0 | 4.3.0 | [React Tabs v6 Breaking Changes](https://github.com/reactjs/react-tabs/blob/master/CHANGELOG.md) - New API, requires React 18 |
 | React Helmet | Removed | 6.1.0 | Replaced with React Helmet Async with better support for React 18 concurrent features |
-| React Helmet Async | | New | |
+| React Helmet Async | | New | Replaced with React Helmet Async with better support for React 18 concurrent features |
 | @testing-library/react | 15.0.6 | 12.1.5 | [Testing Library v13+ Breaking Changes](https://github.com/testing-library/react-testing-library/blob/main/CHANGELOG.md) - Requires React 18, new render API |
-| React Scripts | 5.0.1 | 5.0.1 | To assess|
+| React Side Effects | Removed override | | React helmet required an older version that caused a conflicting peer dependency error. Removed override with react helmet migration |
