@@ -5,7 +5,7 @@ In some cases, however, this is not feasible or does not provide sufficient
 return on the necessary investment to do a major version upgrade. The following
 dependencies are currently fixed to older versions:
 
-- **react-redux**, **redux**, and **redux-thunk**: The latest Redux stack requires React 18.
+- **react-redux**, **redux**, and **redux-thunk**: Consider migration to modern redux toolkit
 - **axios**: Axios is currently tracking the latest version, but it requires the `transformIgnorePatterns` in the Jest configuration in `package.json`. This should be monitored to see if Axios, Jest, or react-scripts update to support this natively. If so, the full `"jest"` property in `package.json` can be removed safely.
 - **tocbot**: Tocbot is currently fixed to `v4.17.3` (or other patch versions) in order to avoid multiple errors logged to the console. In this version, and all previous versions, there is only one error logged when navigating away from the Documentation page.
   These errors increased after version `v4.17.3`.
@@ -32,3 +32,5 @@ dependencies are currently fixed to older versions:
 | React Helmet Async     |                  | New           | Replaced with React Helmet Async with better support for React 18 concurrent features                                                                               |
 | @testing-library/react | 15.0.6           | 12.1.5        | [Testing Library v13+ Breaking Changes](https://github.com/testing-library/react-testing-library/blob/main/CHANGELOG.md) - Requires React 18, new render API        |
 | React Side Effects     | Removed override |               | React helmet required an older version that caused a conflicting peer dependency error. Removed override with react helmet migration                                |
+| Express | 4.19.2 | 5.1.0 | |
+| Material UI stack ||| To assess |
