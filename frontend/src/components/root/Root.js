@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import { Artifact } from 'components/artifact';
 import { Tester } from 'components/testing';
@@ -31,21 +31,23 @@ const Root = ({ store }) => (
       <ThemeProvider theme={lightTheme}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <QueryClientProvider client={queryClient}>
-            <App>
-              <Routes>
-                <Route path="" element={<Landing />} />
-                <Route path="build/:id" element={<PrivateRoute component={Workspace} />} />
-                <Route path="build" element={<PrivateRoute component={Workspace} />} />
-                <Route path="artifacts" element={<PrivateRoute component={Artifact} />} />
-                <Route path="testing" element={<PrivateRoute component={Tester} />} />
-                <Route path="documentation/tutorial" element={<Documentation activeTab={1} />} />
-                <Route path="documentation/datatypes" element={<Documentation activeTab={2} />} />
-                <Route path="documentation/terms" element={<Documentation activeTab={3} />} />
-                <Route path="documentation" element={<Documentation />} />
-                <Route path="userguide" element={<Navigate to="/documentation" replace />} />
-                <Route path="*" element={<ErrorPage errorType="notFound" />} />
-              </Routes>
-            </App>
+            <HelmetProvider>
+              <App>
+                <Routes>
+                  <Route path="" element={<Landing />} />
+                  <Route path="build/:id" element={<PrivateRoute component={Workspace} />} />
+                  <Route path="build" element={<PrivateRoute component={Workspace} />} />
+                  <Route path="artifacts" element={<PrivateRoute component={Artifact} />} />
+                  <Route path="testing" element={<PrivateRoute component={Tester} />} />
+                  <Route path="documentation/tutorial" element={<Documentation activeTab={1} />} />
+                  <Route path="documentation/datatypes" element={<Documentation activeTab={2} />} />
+                  <Route path="documentation/terms" element={<Documentation activeTab={3} />} />
+                  <Route path="documentation" element={<Documentation />} />
+                  <Route path="userguide" element={<Navigate to="/documentation" replace />} />
+                  <Route path="*" element={<ErrorPage errorType="notFound" />} />
+                </Routes>
+              </App>
+            </HelmetProvider>
           </QueryClientProvider>
         </LocalizationProvider>
       </ThemeProvider>

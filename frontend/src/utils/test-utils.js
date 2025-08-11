@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { HelmetProvider } from 'react-helmet-async';
 import { act, screen, fireEvent } from '@testing-library/react';
 
 import configureStore from '../store/configureStore';
@@ -17,7 +18,9 @@ const ProviderWrapper = ({ children, pathname }) => (
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <QueryClientProvider client={new QueryClient()}>
           <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>
+            <ThemeProvider theme={lightTheme}>
+              <HelmetProvider>{children}</HelmetProvider>
+            </ThemeProvider>
           </StyledEngineProvider>
         </QueryClientProvider>
       </LocalizationProvider>
