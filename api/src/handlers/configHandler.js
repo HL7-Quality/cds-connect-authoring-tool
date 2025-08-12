@@ -39,17 +39,18 @@ function getOneValueSet(request, result) {
   let selectedObject = ValueSets[request.params.valueset];
   if (selectedObject === undefined) {
     result.status(404).send('This level of ValueSet does not exists');
+    return;
   }
 
   // Gets the nested ValueSet as deep as specified
-  const path = request.params['0'].split('/');
+  const path = request.params.path.split('/');
   for (let i = 0; i < path.length; i++) {
     const variable = path[i];
     if (variable !== '') {
       selectedObject = selectedObject[variable];
       if (selectedObject === undefined) {
         result.status(404).send('This level of ValueSet does not exist');
-        break;
+        return;
       }
     }
   }
