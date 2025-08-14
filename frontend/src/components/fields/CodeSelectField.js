@@ -16,7 +16,15 @@ const CodeSelectField = ({ namePrefix }) => {
   const codeFieldName = namePrefix ? `${namePrefix}.code` : 'code';
   const systemFieldName = namePrefix ? `${namePrefix}.system` : 'system';
   const otherFieldName = namePrefix ? `${namePrefix}.other` : 'other';
-  const { mutateAsync, data: codeData, isLoading, isSuccess, isError, status, reset } = useMutation({
+  const {
+    mutateAsync,
+    data: codeData,
+    isLoading,
+    isSuccess,
+    isError,
+    status,
+    reset
+  } = useMutation({
     mutationFn: validateCode
   });
   const vsacApiKey = useSelector(state => state.vsac.apiKey);

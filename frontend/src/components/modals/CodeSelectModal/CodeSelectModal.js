@@ -14,7 +14,13 @@ import validateCode from 'queries/validateCode';
 import useStyles from '../styles';
 
 const CodeSelectModal = ({ handleCloseModal, handleSelectCode, initialValue }) => {
-  const { mutateAsync, isLoading, isSuccess, status, data: codeData } = useMutation({
+  const {
+    mutateAsync,
+    isLoading,
+    isSuccess,
+    status,
+    data: codeData
+  } = useMutation({
     mutationFn: validateCode
   });
   const [code, setCode] = useState(initialValue?.code || '');
