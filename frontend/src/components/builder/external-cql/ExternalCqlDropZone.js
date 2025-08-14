@@ -44,9 +44,10 @@ const ExternalCqlDropZone = () => {
     mutationFn: addExternalCql,
     onSuccess: message => {
       if (typeof message === 'string') setMessage(message);
-      queryClient.invalidateQueries(['externalCql']);
-      queryClient.invalidateQueries(['modifiers']);
-      handleLoadArtifact(artifact._id);
+      queryClient.refetchQueries(['externalCql', artifact._id]).then(() => {
+        queryClient.invalidateQueries(['modifiers']);
+        handleLoadArtifact(artifact._id);
+      });
     },
     onError: ({ statusText, cqlErrors }) => {
       setUploadErrorMessage(statusText || 'An error occurred.');

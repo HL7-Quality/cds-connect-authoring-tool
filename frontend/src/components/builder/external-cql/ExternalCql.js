@@ -11,7 +11,7 @@ const ExternalCql = () => {
   const artifact = useSelector(state => state.artifacts.artifact);
   const query = { artifactId: artifact._id };
   const { data: externalCqlList, isLoading } = useQuery({
-    queryKey: ['externalCql', query],
+    queryKey: ['externalCql', artifact._id],
     queryFn: () => fetchExternalCqlList(query),
     enabled: artifact._id != null
   });

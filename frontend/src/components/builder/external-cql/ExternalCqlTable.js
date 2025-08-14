@@ -36,8 +36,8 @@ const ExternalCqlTable = ({ externalCqlList }) => {
   }, [invokeSaveArtifact, artifact, dispatch]);
   const deleteMutation = useMutation({
     mutationFn: deleteExternalCql,
-    onSuccess: () => {
-      queryClient.invalidateQueries(['externalCql']);
+    onSuccess: async () => {
+      await queryClient.refetchQueries(['externalCql', artifact._id]);
       queryClient.invalidateQueries(['modifiers']);
       handleLoadArtifact(artifact._id);
     }
