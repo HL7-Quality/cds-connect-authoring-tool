@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useLatest, usePrevious } from 'react-use';
 import { Alert, Button, CircularProgress } from '@mui/material';
 import { useField } from 'formik';
@@ -16,7 +16,9 @@ const CodeSelectField = ({ namePrefix }) => {
   const codeFieldName = namePrefix ? `${namePrefix}.code` : 'code';
   const systemFieldName = namePrefix ? `${namePrefix}.system` : 'system';
   const otherFieldName = namePrefix ? `${namePrefix}.other` : 'other';
-  const { mutateAsync, data: codeData, isLoading, isSuccess, isError, isIdle, reset } = useMutation(validateCode);
+  const { mutateAsync, data: codeData, isLoading, isSuccess, isError, status, reset } = useMutation({
+    mutationFn: validateCode
+  });
   const vsacApiKey = useSelector(state => state.vsac.apiKey);
   const [{ value: codeFieldValue }] = useField(codeFieldName);
   const [{ value: systemFieldValue }] = useField(systemFieldName);
@@ -45,7 +47,7 @@ const CodeSelectField = ({ namePrefix }) => {
   }, [mutateAsync, fieldValuesRef, vsacApiKey]);
 
   const shouldReset =
-    !isIdle &&
+    status !== 'idle' &&
     (prevCodeValue !== codeFieldValue || prevSystemValue !== systemFieldValue || prevOtherValue !== otherFieldValue);
   useEffect(() => {
     if (shouldReset) reset();

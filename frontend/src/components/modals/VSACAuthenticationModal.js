@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useLatest } from 'react-use';
 import { TextField } from '@mui/material';
 import { Alert } from '@mui/material';
@@ -18,7 +18,9 @@ const VSACAuthenticationModal = ({ handleCloseModal }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const { mutateAsync, isLoading, isError } = useMutation(authenticateVSAC);
+  const { mutateAsync, isLoading, isError } = useMutation({
+    mutationFn: authenticateVSAC
+  });
 
   const closeModal = useCallback(() => {
     handleCloseModal();

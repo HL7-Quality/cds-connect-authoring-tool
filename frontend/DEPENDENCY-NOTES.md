@@ -33,4 +33,6 @@ dependencies are currently fixed to older versions:
 | @testing-library/react | 15.0.6           | 12.1.5        | [Testing Library v13+ Breaking Changes](https://github.com/testing-library/react-testing-library/blob/main/CHANGELOG.md) - Requires React 18, new render API        |
 | React Side Effects     | Removed override |               | React helmet required an older version that caused a conflicting peer dependency error. Removed override with react helmet migration                                |
 | Express | 4.19.2 | 5.1.0 | |
-| Material UI stack ||| To assess |
+| Material UI stack ||| To assess: @mui/styles is deprecated and it is not recommended to use with new versions of material. Upgrading this stack will require substantial refactoring to replace JSS with Emotion |
+| React Query | 3.39.3 | Replaced | Migrated to Tanstack React Query |
+| Tanstack React Query | New | 5.85.3 | Migrated from react query 3; Updated useQuery and useMutation syntax |

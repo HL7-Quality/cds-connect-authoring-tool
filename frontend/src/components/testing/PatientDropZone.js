@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Alert, CircularProgress } from '@mui/material';
 import { CloudUpload as CloudUploadIcon } from '@mui/icons-material';
 import clsx from 'clsx';
@@ -17,9 +17,10 @@ const PatientDropZone = () => {
   const [patientData, setPatientData] = useState(null);
   const [versionOptions, setVersionOptions] = useState(['R4', 'STU3', 'DSTU2']);
   const queryClient = useQueryClient();
-  const { mutateAsync: asyncAddPatient, isLoading: isAddingPatient } = useMutation(addPatient, {
+  const { mutateAsync: asyncAddPatient, isLoading: isAddingPatient } = useMutation({
+    mutationFn: addPatient,
     onSuccess: () => {
-      queryClient.invalidateQueries('patients');
+      queryClient.invalidateQueries(['patients']);
       setShowPatientUploadedMessage(true);
     }
   });

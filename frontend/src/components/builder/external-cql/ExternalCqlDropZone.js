@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDropzone } from 'react-dropzone';
 import { Alert, CircularProgress } from '@mui/material';
 import { CloudUpload as CloudUploadIcon } from '@mui/icons-material';
@@ -21,14 +21,18 @@ const ExternalCqlDropZone = () => {
   const dropZoneStyles = useDropZoneStyles();
   const spacingStyles = useSpacingStyles();
   const queryClient = useQueryClient();
-  const { mutate: invokeFetchArtifact } = useMutation(fetchArtifact);
+  const { mutate: invokeFetchArtifact } = useMutation({
+    mutationFn: fetchArtifact
+  });
   const handleLoadArtifact = useCallback(
     id => {
       invokeFetchArtifact({ artifactId: id }, { onSuccess: data => dispatch(loadArtifact(data)) });
     },
     [invokeFetchArtifact, dispatch]
   );
-  const { mutateAsync: invokeSaveArtifact } = useMutation(saveArtifact);
+  const { mutateAsync: invokeSaveArtifact } = useMutation({
+    mutationFn: saveArtifact
+  });
   const handleSaveArtifact = useCallback(async () => {
     try {
       await invokeSaveArtifact({ artifact }, { onSuccess: data => dispatch(loadArtifact(data)) });
@@ -36,11 +40,12 @@ const ExternalCqlDropZone = () => {
       console.error('Save artifact failed:', error);
     }
   }, [invokeSaveArtifact, artifact, dispatch]);
-  const addMutation = useMutation(addExternalCql, {
+  const addMutation = useMutation({
+    mutationFn: addExternalCql,
     onSuccess: message => {
       if (typeof message === 'string') setMessage(message);
-      queryClient.invalidateQueries('externalCql');
-      queryClient.invalidateQueries('modifiers');
+      queryClient.invalidateQueries(['externalCql']);
+      queryClient.invalidateQueries(['modifiers']);
       handleLoadArtifact(artifact._id);
     },
     onError: ({ statusText, cqlErrors }) => {

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useLatest } from 'react-use';
 import { CircularProgress } from '@mui/material';
 
@@ -14,7 +14,9 @@ import validateCode from 'queries/validateCode';
 import useStyles from '../styles';
 
 const CodeSelectModal = ({ handleCloseModal, handleSelectCode, initialValue }) => {
-  const { mutateAsync, isLoading, isSuccess, isIdle, data: codeData } = useMutation(validateCode);
+  const { mutateAsync, isLoading, isSuccess, status, data: codeData } = useMutation({
+    mutationFn: validateCode
+  });
   const [code, setCode] = useState(initialValue?.code || '');
   const [codeSystem, setCodeSystem] = useState(initialValue?.codeSystem?.name || null);
   const [otherCodeSystem, setOtherCodeSystem] = useState(initialValue?.otherCodeSystem || '');
@@ -56,7 +58,7 @@ const CodeSelectModal = ({ handleCloseModal, handleSelectCode, initialValue }) =
 
   return (
     <Modal
-      Footer={<CodeSelectModalFooter isValidCode={isIdle || isLoading ? null : isSuccess} />}
+      Footer={<CodeSelectModalFooter isValidCode={status === 'idle' || isLoading ? null : isSuccess} />}
       handleCloseModal={handleCloseModal}
       handleSaveModal={handleSaveCodeSelection}
       hasCancelButton

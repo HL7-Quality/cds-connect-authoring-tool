@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import moment from 'moment';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
@@ -28,31 +28,37 @@ const Workspace = () => {
   const artifact = useSelector(state => state.artifacts.artifact);
   const scrollToId = useSelector(state => state.navigation.scrollToId);
   const externalCqlQuery = { artifactId: id };
-  const { data: externalCqlList } = useQuery(
-    ['externalCql', externalCqlQuery],
-    () => fetchExternalCqlList(externalCqlQuery),
-    { enabled: externalCqlQuery.artifactId != null }
-  );
-  const { mutate: invokeFetchArtifact, isLoading } = useMutation(fetchArtifact);
+  const { data: externalCqlList } = useQuery({
+    queryKey: ['externalCql', externalCqlQuery],
+    queryFn: () => fetchExternalCqlList(externalCqlQuery),
+    enabled: externalCqlQuery.artifactId != null
+  });
+  const { mutate: invokeFetchArtifact, isLoading } = useMutation({
+    mutationFn: fetchArtifact
+  });
   const handleLoadArtifact = useCallback(
     id => {
       invokeFetchArtifact({ artifactId: id }, { onSuccess: data => dispatch(loadArtifact(data)) });
     },
     [invokeFetchArtifact, dispatch]
   );
-  const { mutate: invokeInitializeArtifact } = useMutation(initializeArtifact);
+  const { mutate: invokeInitializeArtifact } = useMutation({
+    mutationFn: initializeArtifact
+  });
   const handleInitializeArtifact = useCallback(
     () => invokeInitializeArtifact({}, { onSuccess: data => dispatch(loadArtifact(data)) }),
     [invokeInitializeArtifact, dispatch]
   );
-  const { mutate: invokeSaveArtifact } = useMutation(saveArtifact);
+  const { mutate: invokeSaveArtifact } = useMutation({
+    mutationFn: saveArtifact
+  });
   const handleSaveArtifact = useCallback(
     (artifact, artifactProps, updateStatusMessage = true) =>
       invokeSaveArtifact(
         { artifact, artifactProps },
         {
           onSuccess: data => {
-            queryClient.invalidateQueries('artifacts');
+            queryClient.invalidateQueries(['artifacts']);
             dispatch(artifactSaved(data));
             if (updateStatusMessage) setStatusMessage(`Last saved ${moment().format('dddd, MMMM Do YYYY, h:mm:ss a')}`);
           },
@@ -63,7 +69,8 @@ const Workspace = () => {
       ),
     [invokeSaveArtifact, queryClient, dispatch]
   );
-  const { mutateAsync: invokeDownloadArtifact } = useMutation(downloadArtifact, {
+  const { mutateAsync: invokeDownloadArtifact } = useMutation({
+    mutationFn: downloadArtifact,
     onSuccess: () => {
       setStatusMessage(`Downloaded ${moment().format('dddd, MMMM Do YYYY, h:mm:ss a')}`);
     },
