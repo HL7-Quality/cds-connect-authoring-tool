@@ -5,4 +5,4 @@ function exportCQL(libraryGroup) {
   return exporter.export(libraryGroup);
 }
 
-export { exportCQL };
+export default exportCQL;

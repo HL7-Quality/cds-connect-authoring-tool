@@ -5,4 +5,4 @@ class RawCQL {
   }
 }
 
-export default { RawCQL };
+export default RawCQL;

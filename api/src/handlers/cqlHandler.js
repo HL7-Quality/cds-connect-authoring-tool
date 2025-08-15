@@ -13,9 +13,9 @@ import busboy from 'busboy';
 import config from '../config.js';
 import Artifact from '../models/artifact.js';
 import CQLLibrary from '../models/cqlLibrary.js';
-import { exportCQL } from '../cql-merge/export/exportCQL.js';
-import { importCQL } from '../cql-merge/import/importCQL.js';
-import rawCQL from '../cql-merge/utils/RawCQL.js';
+import exportCQL from '../cql-merge/export/exportCQL.js';
+import importCQL from '../cql-merge/import/importCQL.js';
+import RawCQL from '../cql-merge/utils/RawCQL.js';
 import { sendUnauthorized } from './common.js';
 
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -179,14 +179,13 @@ const queryAliasMap = {
 // in functions external to the artifact.
 let fhirTarget;
 
-// export default {
-//   makeCQLtoELMRequest,
-//   buildCQL,
+// module.exports = {
 //   objToZippedCql,
 //   objToViewableCql,
 //   objToELM,
-//   objConvert,
-//   formatCQL
+//   makeCQLtoELMRequest,
+//   formatCQL,
+//   buildCQL
 // };
 
 function getFieldWithType(fields, type) {
@@ -1622,9 +1621,9 @@ function objConvert(req, res, callback) {
         `AT_Internal_CDS_Connect_Commons_for_FHIRv${fhirVersion.replace(/\./g, '')}.cql`
       );
       const conversionsPath = path.join(helperPath, 'AT_Internal_CDS_Connect_Conversions.cql');
-      const artifactRaw = new rawCQL.RawCQL(artifactJson.text);
-      const commonsRaw = new rawCQL.RawCQL(fs.readFileSync(commonsPath, 'utf-8'));
-      const conversionsRaw = new rawCQL.RawCQL(fs.readFileSync(conversionsPath, 'utf-8'));
+      const artifactRaw = new RawCQL(artifactJson.text);
+      const commonsRaw = new RawCQL(fs.readFileSync(commonsPath, 'utf-8'));
+      const conversionsRaw = new RawCQL(fs.readFileSync(conversionsPath, 'utf-8'));
       const libraryGroup = importCQL(artifactRaw, [commonsRaw, conversionsRaw]);
       // Reassigning the text field of the artifactJson is safe, since it makes no
       // changes to the original CqlArtifact instance, and no other fields in the
@@ -1897,13 +1896,3 @@ export default {
   objConvert,
   formatCQL
 };
-
-// export {
-//   makeCQLtoELMRequest,
-//   buildCQL,
-//   objToZippedCql,
-//   objToViewableCql,
-//   objToELM,
-//   objConvert,
-//   formatCQL
-// };

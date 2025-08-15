@@ -6,4 +6,4 @@ function importCQL(libraryRawCQL, dependencyRawCQLs) {
   return importer.import(libraryRawCQL, dependencyRawCQLs);
 }
 
-export { importCQL };
+export default importCQL;
