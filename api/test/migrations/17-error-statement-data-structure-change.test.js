@@ -1,6 +1,4 @@
-import {
-  convertArtifactErrorStatement
-} from '../../src/migrations/old-migrations/17-error-statement-data-structure-change.js';
+import { convertArtifactErrorStatement } from '../../src/migrations/old-migrations/17-error-statement-data-structure-change.js';
 import { importChaiExpect } from '../utils.js';
 
 // Skipping this test since migration 17 will not work unless uuid is manually installed.

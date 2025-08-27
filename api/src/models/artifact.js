@@ -6,9 +6,15 @@ import codeSystems from '../data/codeSystems.js';
 import contextMappings from '../data/contextMappings.js';
 
 // Import JSON files from frontend using fs.readFileSync
-const nuccProviderTaxonomy = JSON.parse(fs.readFileSync(new URL('../../../frontend/src/data/nuccProviderTaxonomyV20.0.json', import.meta.url))); // http://nucc.org/
-const fhirWorkflowTaskCodes = JSON.parse(fs.readFileSync(new URL('../../../frontend/src/data/fhirWorkflowTaskCodesV3.json', import.meta.url))); // https://terminology.hl7.org/1.0.0/ValueSet-v3-ActTaskCode.html
-const fhirClinicalVenueCodes = JSON.parse(fs.readFileSync(new URL('../../../frontend/src/data/fhirClinicalVenueCodesV3.json', import.meta.url))); // https://terminology.hl7.org/1.0.0/ValueSet-v3-ServiceDeliveryLocationRoleType.html
+const nuccProviderTaxonomy = JSON.parse(
+  fs.readFileSync(new URL('../../../frontend/src/data/nuccProviderTaxonomyV20.0.json', import.meta.url))
+); // http://nucc.org/
+const fhirWorkflowTaskCodes = JSON.parse(
+  fs.readFileSync(new URL('../../../frontend/src/data/fhirWorkflowTaskCodesV3.json', import.meta.url))
+); // https://terminology.hl7.org/1.0.0/ValueSet-v3-ActTaskCode.html
+const fhirClinicalVenueCodes = JSON.parse(
+  fs.readFileSync(new URL('../../../frontend/src/data/fhirClinicalVenueCodesV3.json', import.meta.url))
+); // https://terminology.hl7.org/1.0.0/ValueSet-v3-ServiceDeliveryLocationRoleType.html
 
 const Schema = mongoose.Schema;
 

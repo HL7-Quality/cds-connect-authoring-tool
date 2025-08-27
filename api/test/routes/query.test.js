@@ -15,7 +15,6 @@ describe('Route: /authoring/api/query/implicitconversion', () => {
     [app, options] = setupExpressApp();
   });
 
-
   afterEach(() => {
     sandbox.restore();
     options.reset();

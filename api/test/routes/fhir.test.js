@@ -10,9 +10,13 @@ import { setupExpressApp } from '../utils.js';
 const filename = fileURLToPath(import.meta.url);
 const dir = dirname(filename);
 
-const HL7AdministrativeGenderVS = JSON.parse(readFileSync(join(dir, 'fixtures/hl7-administrative-gender-vs.json'), 'utf-8'));
+const HL7AdministrativeGenderVS = JSON.parse(
+  readFileSync(join(dir, 'fixtures/hl7-administrative-gender-vs.json'), 'utf-8')
+);
 const HyperproinsulinemiaCode = JSON.parse(readFileSync(join(dir, 'fixtures/hyperproinsulinemia-code.json'), 'utf-8'));
-const ONCAdministrativeSexFhirVS = JSON.parse(readFileSync(join(dir, 'fixtures/onc-administrative-sex-fhir-vs.json'), 'utf-8'));
+const ONCAdministrativeSexFhirVS = JSON.parse(
+  readFileSync(join(dir, 'fixtures/onc-administrative-sex-fhir-vs.json'), 'utf-8')
+);
 const VSSearchResults = JSON.parse(readFileSync(join(dir, 'fixtures/vs-search-results.json'), 'utf-8'));
 
 const sandbox = sinon.createSandbox();
@@ -47,7 +51,8 @@ describe('Route: /authoring/api/fhir/login', () => {
       sandbox.replace(
         FHIRClient,
         'getOneValueSet',
-        sandbox.mock('getOneValueSet')
+        sandbox
+          .mock('getOneValueSet')
           .withArgs('', 'my-api-key')
           .rejects({ response: { status: 404 } })
       );
@@ -61,7 +66,8 @@ describe('Route: /authoring/api/fhir/login', () => {
       sandbox.replace(
         FHIRClient,
         'getOneValueSet',
-        sandbox.mock('getOneValueSet')
+        sandbox
+          .mock('getOneValueSet')
           .withArgs('', 'my-wrong-api-key')
           .rejects({ response: { status: 401 } })
       );
@@ -87,7 +93,8 @@ describe('Route: /authoring/api/fhir/login', () => {
       sandbox.replace(
         FHIRClient,
         'getOneValueSet',
-        sandbox.mock('getOneValueSet')
+        sandbox
+          .mock('getOneValueSet')
           .withArgs('', 'my-api-key')
           .rejects({ response: { status: 502 } })
       );
@@ -98,7 +105,11 @@ describe('Route: /authoring/api/fhir/login', () => {
     });
 
     it('should return HTTP 500 when unknown error occurs w/ no response code from VSAC FHIR API', done => {
-      sandbox.replace(FHIRClient, 'getOneValueSet', sandbox.mock('getOneValueSet').withArgs('', 'my-api-key').rejects(new Error()));
+      sandbox.replace(
+        FHIRClient,
+        'getOneValueSet',
+        sandbox.mock('getOneValueSet').withArgs('', 'my-api-key').rejects(new Error())
+      );
       request(app)
         .post('/authoring/api/fhir/login')
         .set('Authorization', `Basic ${Buffer.from(':my-api-key').toString('base64')}`)
@@ -142,7 +153,8 @@ describe('Route: /authoring/api/fhir/search', () => {
       sandbox.replace(
         FHIRClient,
         'searchForValueSets',
-        sandbox.mock('searchForValueSets')
+        sandbox
+          .mock('searchForValueSets')
           .withArgs('administrative', '', 'my-api-key')
           .rejects({ response: { status: 401 } })
       );
@@ -170,7 +182,8 @@ describe('Route: /authoring/api/fhir/search', () => {
       sandbox.replace(
         FHIRClient,
         'searchForValueSets',
-        sandbox.mock('searchForValueSets')
+        sandbox
+          .mock('searchForValueSets')
           .withArgs('administrative', '', 'my-api-key')
           .rejects({ response: { status: 502 } })
       );
