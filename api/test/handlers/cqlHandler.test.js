@@ -1066,8 +1066,8 @@ describe('cqlHandler', () => {
           ]
         };
         const stu3RawBaseQuery = _.cloneDeep(rawBaseQuery);
-        (stu3RawBaseQuery.dataModel = { name: 'FHIR', version: '3.0.0' }),
-          (stu3RawBaseQuery.expTreeInclude.childInstances[1].modifiers[0].where = templateTest);
+        ((stu3RawBaseQuery.dataModel = { name: 'FHIR', version: '3.0.0' }),
+          (stu3RawBaseQuery.expTreeInclude.childInstances[1].modifiers[0].where = templateTest));
         const artifact = cqlHandler.buildCQL(stu3RawBaseQuery);
         const converted = artifact.toString();
         // NOTE: valueQuantity --> value as FHIR.Quantity
@@ -1085,8 +1085,8 @@ describe('cqlHandler', () => {
           ]
         };
         const stu3RawBaseQuery = _.cloneDeep(rawBaseQuery);
-        (stu3RawBaseQuery.dataModel = { name: 'FHIR', version: '1.0.2' }),
-          (stu3RawBaseQuery.expTreeInclude.childInstances[1].modifiers[0].where = templateTest);
+        ((stu3RawBaseQuery.dataModel = { name: 'FHIR', version: '1.0.2' }),
+          (stu3RawBaseQuery.expTreeInclude.childInstances[1].modifiers[0].where = templateTest));
         const artifact = cqlHandler.buildCQL(stu3RawBaseQuery);
         const converted = artifact.toString();
         // NOTE: valueQuantity stays as-is (no cast)

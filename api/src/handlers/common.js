@@ -6,4 +6,3 @@ function sendUnauthorized(res) {
 }
 
 export { sendUnauthorized };
-

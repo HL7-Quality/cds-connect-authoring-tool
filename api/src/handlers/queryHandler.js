@@ -1,8 +1,12 @@
 import fs from 'fs';
 
 // Import JSON files using fs.readFileSync
-const dstu2_resources = JSON.parse(fs.readFileSync(new URL('../data/query_builder/dstu2_resources.json', import.meta.url)));
-const stu3_resources = JSON.parse(fs.readFileSync(new URL('../data/query_builder/stu3_resources.json', import.meta.url)));
+const dstu2_resources = JSON.parse(
+  fs.readFileSync(new URL('../data/query_builder/dstu2_resources.json', import.meta.url))
+);
+const stu3_resources = JSON.parse(
+  fs.readFileSync(new URL('../data/query_builder/stu3_resources.json', import.meta.url))
+);
 const r4_resources = JSON.parse(fs.readFileSync(new URL('../data/query_builder/r4_resources.json', import.meta.url)));
 const operators = JSON.parse(fs.readFileSync(new URL('../data/query_builder/operators.json', import.meta.url)));
 

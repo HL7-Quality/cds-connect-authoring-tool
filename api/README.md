@@ -175,4 +175,4 @@ limitations under the License.
 
 Following AHRQ's shutdown of the hosted CDS Connect systems, the code was forked by Preston Lee without the AHRQ-specific headers, footers, navigational elements and branding, and maintained as a community project to fix long-standing technical debt and outdated dependency issues.
 
-Subsequent updates and contributions are made under the same Apache 2.0 license. 
+Subsequent updates and contributions are made under the same Apache 2.0 license.

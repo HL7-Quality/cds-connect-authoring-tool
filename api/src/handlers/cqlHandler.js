@@ -22,8 +22,12 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirPath = path.dirname(currentFilePath);
 
 // Import JSON files using fs.readFileSync
-const dstu2_resources = JSON.parse(fs.readFileSync(new URL('../data/query_builder/dstu2_resources.json', import.meta.url)));
-const stu3_resources = JSON.parse(fs.readFileSync(new URL('../data/query_builder/stu3_resources.json', import.meta.url)));
+const dstu2_resources = JSON.parse(
+  fs.readFileSync(new URL('../data/query_builder/dstu2_resources.json', import.meta.url))
+);
+const stu3_resources = JSON.parse(
+  fs.readFileSync(new URL('../data/query_builder/stu3_resources.json', import.meta.url))
+);
 const r4_resources = JSON.parse(fs.readFileSync(new URL('../data/query_builder/r4_resources.json', import.meta.url)));
 const operators = JSON.parse(fs.readFileSync(new URL('../data/query_builder/operators.json', import.meta.url)));
 
@@ -1781,7 +1785,14 @@ function convertToElm(artifacts, getXML, callback /* (error, elmFiles) */) {
   }
 
   // Load all the supplementary CQL files, open file streams to them, and convert to ELM
-  const helperPath = path.join(currentDirPath, '..', 'data', 'library_helpers', 'CQLFiles', fhirTarget.version || '4.0.1');
+  const helperPath = path.join(
+    currentDirPath,
+    '..',
+    'data',
+    'library_helpers',
+    'CQLFiles',
+    fhirTarget.version || '4.0.1'
+  );
   const fileStream = fs.createReadStream(`${helperPath}/FHIRHelpers.cql`);
   // NOTE: using makeCQLtoELMRequest function directly
   makeCQLtoELMRequest(artifacts, [fileStream], getXML, callback);

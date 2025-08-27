@@ -9,10 +9,8 @@ import { setupExpressApp, importChaiExpect } from '../utils.js';
 import Artifact from '../../src/models/artifact.js';
 import CQLLibrary from '../../src/models/cqlLibrary.js';
 
-
 describe('Route: /authoring/api/artifacts/', () => {
   let app, options, expect;
-
 
   before(async () => {
     [app, options] = setupExpressApp();

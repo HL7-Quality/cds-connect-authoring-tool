@@ -28,4 +28,4 @@ export default async function migrate() {
         console.log(`Newly applied migrations: ${migrated.length}`);
       }
     });
-};
+}

@@ -37,5 +37,4 @@ async function importChaiExpect() {
   return chai.expect;
 }
 
-
 export { setupExpressApp, importChaiExpect };

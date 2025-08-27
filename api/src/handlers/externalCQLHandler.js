@@ -364,7 +364,6 @@ const shouldLibraryBeUpdated = (library, artifact) => {
   return returnTypesMatch && argsMatch;
 };
 
-
 // Get all libraries for a given artifact
 async function allGet(req, res) {
   if (req.user) {
@@ -942,7 +941,6 @@ async function singleDelete(req, res) {
     sendUnauthorized(res);
   }
 }
-
 
 export default {
   allGet,

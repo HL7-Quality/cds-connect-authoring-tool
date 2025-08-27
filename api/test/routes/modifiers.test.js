@@ -23,7 +23,6 @@ describe('Route: /authoring/api/modifiers/:artifact', () => {
     expect = await importChaiExpect();
   });
 
-
   afterEach(() => {
     sandbox.restore();
     options.reset();

@@ -25,7 +25,6 @@ describe('Route: /authoring/api/testing', () => {
     expect = await importChaiExpect();
   });
 
-
   afterEach(() => {
     sandbox.restore();
     options.reset();

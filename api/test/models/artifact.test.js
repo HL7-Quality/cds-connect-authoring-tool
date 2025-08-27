@@ -10,20 +10,37 @@ import { importChaiExpect } from '../utils.js';
 
 describe('Artifact', () => {
   let expect;
-  let testEmptyPublishableLibrary, testPublishableLibraryWithDates, testPublishableLibraryWithDatesAndContext, testPublishableLibrary, testExpandedContext;
-  
+  let testEmptyPublishableLibrary,
+    testPublishableLibraryWithDates,
+    testPublishableLibraryWithDatesAndContext,
+    testPublishableLibrary,
+    testExpandedContext;
+
   before(async () => {
     expect = await importChaiExpect();
-    
+
     // Load JSON fixtures
     const currentFilename = fileURLToPath(import.meta.url);
     const currentDirname = dirname(currentFilename);
-    
-    testEmptyPublishableLibrary = JSON.parse(readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Empty-Artifact.json'), 'utf8'));
-    testPublishableLibraryWithDates = JSON.parse(readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Artifact-With-Dates.json'), 'utf8'));
-    testPublishableLibraryWithDatesAndContext = JSON.parse(readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Artifact-With-Dates-And-Context.json'), 'utf8'));
-    testPublishableLibrary = JSON.parse(readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-CPG-Export.json'), 'utf8'));
-    testExpandedContext = JSON.parse(readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Expanded-Context.json'), 'utf8'));
+
+    testEmptyPublishableLibrary = JSON.parse(
+      readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Empty-Artifact.json'), 'utf8')
+    );
+    testPublishableLibraryWithDates = JSON.parse(
+      readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Artifact-With-Dates.json'), 'utf8')
+    );
+    testPublishableLibraryWithDatesAndContext = JSON.parse(
+      readFileSync(
+        join(currentDirname, './fixtures/artifact/Library-Test-Artifact-With-Dates-And-Context.json'),
+        'utf8'
+      )
+    );
+    testPublishableLibrary = JSON.parse(
+      readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-CPG-Export.json'), 'utf8')
+    );
+    testExpandedContext = JSON.parse(
+      readFileSync(join(currentDirname, './fixtures/artifact/Library-Test-Expanded-Context.json'), 'utf8')
+    );
   });
 
   describe('#validate', () => {
