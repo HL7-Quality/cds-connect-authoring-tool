@@ -183,15 +183,6 @@ const queryAliasMap = {
 // in functions external to the artifact.
 let fhirTarget;
 
-// module.exports = {
-//   objToZippedCql,
-//   objToViewableCql,
-//   objToELM,
-//   makeCQLtoELMRequest,
-//   formatCQL,
-//   buildCQL
-// };
-
 function getFieldWithType(fields, type) {
   return fields.find(f => f.type.endsWith(type));
 }
