@@ -10,14 +10,16 @@ steps:
     image: plugins/docker
     settings:
       repo: hlseven/cds-connect-authoring-tool
-      tags: [latest-linux-amd64]
+      # tags: [latest-linux-amd64]
+      tags:
+        - ${DRONE_COMMIT_BRANCH}-linux-amd64
       username:
         from_secret: docker_username
       password:
         from_secret: docker_password
-trigger:
-  branch:
-    - master
+# trigger:
+#   branch:
+#     - master
 ---
 name: latest-arm64
 kind: pipeline
@@ -30,15 +32,17 @@ steps:
     image: plugins/docker
     settings:
       repo: hlseven/cds-connect-authoring-tool
-      tags: [latest-linux-arm64]
+      # tags: [latest-linux-arm64]
+      tags:
+        - ${DRONE_COMMIT_BRANCH}-linux-arm64
       # auto_tag: true
       username:
         from_secret: docker_username
       password:
         from_secret: docker_password
-trigger:
-  branch:
-    - master
+# trigger:
+#   branch:
+#     - master
 ---
 name: manifest
 kind: pipeline
@@ -59,8 +63,35 @@ steps:
       platforms:
         - linux/amd64
         - linux/arm64
+      exclude: [master]
 trigger:
   branch:
-    - master
+    include:
+      - master
   status:
     - success
+# ---
+# name: manifest
+# kind: pipeline
+# type: docker
+# depends_on:
+#   - latest-amd64
+#   - latest-arm64
+# steps:
+#   - name: publish-manifest
+#     image: plugins/manifest
+#     settings:
+#       username:
+#         from_secret: docker_username
+#       password:
+#         from_secret: docker_password
+#       template: hlseven/cds-connect-authoring-tool:BRANCH-OS-ARCH
+#       platforms:
+#         - linux/amd64
+#         - linux/arm64
+# trigger:
+#   branch:
+#     exclude:
+#       - master
+#   status:
+#     - success
