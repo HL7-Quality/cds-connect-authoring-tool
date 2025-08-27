@@ -60,5 +60,7 @@ steps:
         - linux/amd64
         - linux/arm64
 trigger:
-   status:
-     - success
+  branch:
+    - master
+  status:
+    - success
