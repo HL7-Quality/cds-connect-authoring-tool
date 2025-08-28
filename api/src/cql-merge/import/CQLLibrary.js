@@ -1,4 +1,4 @@
-const { getRawFromContext } = require('../utils/getRawFromContext');
+import { getRawFromContext } from '../utils/getRawFromContext.js';
 
 class CQLLibrary {
   constructor(context, raw) {
@@ -47,4 +47,4 @@ class CQLLibrary {
   }
 }
 
-module.exports = { CQLLibrary };
+export { CQLLibrary };
