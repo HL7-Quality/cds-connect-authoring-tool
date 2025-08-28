@@ -6,7 +6,10 @@ The Clinical Decision Support (CDS) Authoring Tool is a web-based application ai
 
 The CDS Authoring Tool API provides a RESTful backend for the CDS Authoring Tool React web frontend.
 
-The CDS Authoring Tool is part of the [CDS Connect](https://cds.ahrq.gov/cdsconnect) project, sponsored by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ), and initially developed under contract with AHRQ by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
+As of May, 2025, AHRQ's public CDS Connect environment is no longer available. 
+
+The original CDS Authoring Tool from [CDS Connect](https://cds.ahrq.gov/cdsconnect) was sponsored by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ), and initially developed under contract with AHRQ by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
+
 
 ## Contributions
 
@@ -30,7 +33,7 @@ Alternately, MongoDB can be installed and run using a docker image:
 
 ```bash
 mkdir -p db
-docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:6.0
+docker run --name=mongodb --volume=$PWD/db:/data/db -p 27017:27017 --restart=unless-stopped --detach=true mongo:8
 ```
 
 This creates a local db directory and then runs a MongoDB docker container that will store files in that directory.
@@ -44,7 +47,7 @@ npm install # installs this app's dependencies based on this project's package.j
 By default, the project will attempt to convert CQL to ELM on download. To disable this in development, see the configuration section below. If enabled, you will need the CQL-to-ELM translation service, a Java application that can be run locally via Maven or Docker.
 
 - To run locally with Maven: https://github.com/cqframework/cql-translation-service
-- To run locally with Docker, install Docker and run: `docker run -p 8080:8080 cqframework/cql-translation-service:v2.3.0`
+- To run locally with Docker, install Docker and run: `docker run -p 8080:8080 cqframework/cql-translation-service:v2.6.0`
 
 ### Add / Remove / Adjust dependencies
 

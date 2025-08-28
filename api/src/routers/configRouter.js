@@ -10,7 +10,7 @@ ConfigRouter.route('/templates').get(config.getTemplates);
 ConfigRouter.route('/valuesets').get(config.getValueSets);
 
 // Routes for /authoring/api/config/valuesets/:valueset*
-ConfigRouter.route('/valuesets/:valueset/:path').get(config.getOneValueSet);
+ConfigRouter.route('/valuesets/*valueset').get(config.getOneValueSet);
 
 // Routes for /authoring/api/config/conversions
 ConfigRouter.route('/conversions').get(config.getConversionFunctions);

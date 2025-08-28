@@ -10,9 +10,9 @@
 #   common to all (or most?) environments.
 ###############################################################################
 
-FROM node:20-alpine as base
+FROM node:22-alpine AS base
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 ###############################################################################
 # STAGE 1: install_backend
@@ -20,7 +20,7 @@ ENV NODE_ENV production
 # - Copy over api source code
 ###############################################################################
 
-FROM base as install_backend
+FROM base AS install_backend
 
 # First copy just the package.json, package-lock.json, and local dependencies
 # so that if they have not changed, we can use cached node_modules instead of
@@ -40,7 +40,7 @@ COPY ./api /usr/src/app/api
 # - Copy over frontend source code
 ###############################################################################
 
-FROM base as install_frontend
+FROM base AS install_frontend
 
 # First copy just the package.json and package-lock.json so that if they have
 # not changed, we can use cached node_modules instead of redownloading them all.
@@ -57,34 +57,25 @@ COPY ./frontend /usr/src/app/frontend
 # - Build frontend code to produce standard html, js, and css files
 ###############################################################################
 
-FROM install_frontend as build_frontend
+FROM install_frontend AS build_frontend
 
 WORKDIR /usr/src/app/frontend
 
 # Install the development dependencies since they're needed by "npm run build"
-ENV NODE_ENV development
+ENV NODE_ENV=development
 RUN npm install
 
 # Switch back to production for the actual build
-ENV NODE_ENV production
+ENV NODE_ENV=production
 RUN npm run build
 
-###############################################################################
-# STAGE 4: final
-# - Setup NODE_ENV as an argument
-# - Install PM2 process manager
-# - Copy over all files needed at run-time
-# - Expose necessary ports
-# - Run as node (more secure than running as root)
-###############################################################################
 
-FROM base as final
-
+FROM base AS final
 ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
-
-RUN npm install -g pm2@5.3.0
-
+ENV NODE_ENV=$NODE_ENV
+# RUN npm install -g pm2@5.3.0
+RUN npm install -g pm2
+# Copy in all runtime files
 COPY --chown=node:node --from=install_backend /usr/src/app/api /usr/src/app/api
 COPY --chown=node:node --from=install_frontend /usr/src/app/frontend/node_modules /usr/src/app/frontend/node_modules
 COPY --chown=node:node --from=build_frontend /usr/src/app/frontend/build /usr/src/app/frontend/build
@@ -93,7 +84,9 @@ COPY --chown=node:node ./frontend/.env* /usr/src/app/frontend/
 COPY --chown=node:node ./frontend/server.js /usr/src/app/frontend/
 COPY --chown=node:node ./pm2.config.js /usr/src/app/
 
+# API
 EXPOSE 3001
+# Frontend
 EXPOSE 9000
 
 USER node

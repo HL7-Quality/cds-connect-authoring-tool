@@ -49,8 +49,8 @@ module.exports = app => {
   // Routing for user settings endpoints
   app.use('/authoring/api/settings', userSettingsRouter);
 
-  // Catch all other Api calls - must be last
-  app.get('/authoring/api/{*splat}', (req, res) => {
+  // Catch all other Api calls
+  app.get('/authoring/api/{*wildcard}', (req, res) => {
     res.sendStatus(404);
   });
 };

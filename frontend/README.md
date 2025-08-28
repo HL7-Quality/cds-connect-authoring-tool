@@ -6,10 +6,6 @@ The Clinical Decision Support (CDS) Authoring Tool is a web-based application ai
 
 The CDS Authoring Tool is part of the [CDS Connect](https://cds.ahrq.gov/cdsconnect) project, sponsored by the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ), and initially developed under contract with AHRQ by MITRE's [Health FFRDC](https://www.mitre.org/our-impact/rd-centers/health-ffrdc).
 
-## Contributions
-
-For information about contributing to this project, please see [CONTRIBUTING](../CONTRIBUTING.md).
-
 ## Development Details
 
 This project provides the R (React) in the MERN application architecture. It was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Relevant files are in the `src/` filter. Refer to the Create React App [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) for guidance on features and how to perform common tasks.

@@ -1,11 +1,12 @@
-version: "3"
+name: cds-connect-authoring-tool-stack
 services:
-  cat:
-    build: .
+  cds-at:
+    # build: .
+    image: p3000/cds-connect-authoring-tool:latest
     environment:
-      MONGO_URL: mongodb://cat-mongo/cds_authoring
-      CQL_TO_ELM_URL: http://cat-cql2elm:8080/cql/translator
-      CQL_FORMATTER_URL: http://cat-cql2elm:8080/cql/formatter
+      MONGO_URL: mongodb://cds-at-mongo/cds_authoring
+      CQL_TO_ELM_URL: http://cds-at-cql2elm:8080/cql/translator
+      CQL_FORMATTER_URL: http://cds-at-cql2elm:8080/cql/formatter
       NODE_ENV: development
     volumes:
       - ./api/config:/usr/src/app/api/config
@@ -13,9 +14,11 @@ services:
       - "3001:3001"
       - "9000:9000"
     links:
-      - cat-mongo
-      - cat-cql2elm
-  cat-mongo:
-    image: mongo:6.0
-  cat-cql2elm:
-    image: cqframework/cql-translation-service:v2.3.0
+      - cds-at-mongo
+      - cds-at-cql2elm
+  cds-at-mongo:
+    image: mongo:8
+    ports:
+      - "27017:27017"
+  cds-at-cql2elm:
+    image: cqframework/cql-translation-service:v2.6.0
