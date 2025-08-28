@@ -59,7 +59,7 @@ steps:
       password:
         from_secret: docker_password
       target: hlseven/cds-connect-authoring-tool:latest
-      template: hlseven/cds-connect-authoring-tool:latest-OS-ARCH
+      template: hlseven/cds-connect-authoring-tool:master-OS-ARCH
       platforms:
         - linux/amd64
         - linux/arm64
@@ -70,28 +70,3 @@ trigger:
       - master
   status:
     - success
-# ---
-# name: manifest
-# kind: pipeline
-# type: docker
-# depends_on:
-#   - latest-amd64
-#   - latest-arm64
-# steps:
-#   - name: publish-manifest
-#     image: plugins/manifest
-#     settings:
-#       username:
-#         from_secret: docker_username
-#       password:
-#         from_secret: docker_password
-#       template: hlseven/cds-connect-authoring-tool:BRANCH-OS-ARCH
-#       platforms:
-#         - linux/amd64
-#         - linux/arm64
-# trigger:
-#   branch:
-#     exclude:
-#       - master
-#   status:
-#     - success
