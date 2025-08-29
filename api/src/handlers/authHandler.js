@@ -1,6 +1,6 @@
-const passport = require('passport');
-const config = require('../config');
-const { sendUnauthorized } = require('./common');
+import passport from 'passport';
+import config from '../config.js';
+import { sendUnauthorized } from './common.js';
 
 function login(req, res, next) {
   // If the user is already logged in, log out first
@@ -56,7 +56,7 @@ function currentUser(req, res) {
   }
 }
 
-module.exports = {
+export default {
   login,
   currentUser,
   logout
