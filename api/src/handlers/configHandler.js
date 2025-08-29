@@ -66,7 +66,7 @@ function getOneValueSet(request, result) {
       selectedObject = selectedObject[variable];
       if (selectedObject === undefined) {
         result.status(404).send('This level of ValueSet does not exist');
-        break;
+        return;
       }
     }
   }
