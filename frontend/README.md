@@ -42,7 +42,12 @@ This project has very few configuration needs, most of which are configurable vi
 - `REACT_APP_DAP_URL`: the URL for the DAP analytics endpoint (blank by default, indicating no analytics)
 - `REACT_APP_GTM_KEY`: the Google Tag Manager key for analytics (blank by default, indicating no analytics)
 
-The default values can be found in the `.env` file and overridden via environment variables. Note that during a production build, the current values in the environment and/or `.env` will be hard-coded into the resulting HTML and JS.
+The default values can be found in the `.env.example` file and overridden via environment variables. Note that during a production build, the current values in the environment and/or `.env` will be hard-coded into the resulting HTML and JS.
+
+To use the default settings:
+```
+cp .env .env.example
+```
 
 In addition, when running a production build via `server.js`, the [Content-Security-Policy](https://content-security-policy.com/) is active, requiring a [hash](https://content-security-policy.com/hash/) of the inline GoogleTagManager script in order for it to be invoked. Since the hash varies depending on the GTM key, it needs to be provided via an environment variable as well:
 
