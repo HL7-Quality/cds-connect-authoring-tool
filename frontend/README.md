@@ -45,6 +45,7 @@ This project has very few configuration needs, most of which are configurable vi
 The default values can be found in the `.env.example` file and overridden via environment variables. Note that during a production build, the current values in the environment and/or `.env` will be hard-coded into the resulting HTML and JS.
 
 To use the default settings:
+
 ```
 cp .env .env.example
 ```
