@@ -24,5 +24,17 @@ module.exports = {
 
       return webpackConfig;
     }
+  },
+  style: {
+    sass: {
+      loaderOptions: {
+        api: 'modern',
+        sassOptions: {
+          // Suppress deprecation warnings from dependencies
+          quietDeps: true,
+          silenceDeprecations: ['import', 'global-builtin', 'color-functions']
+        }
+      }
+    }
   }
 };
