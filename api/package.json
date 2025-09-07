@@ -1,8 +1,8 @@
 {
   "name": "cds_authoring_tool_api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
-  "homepage": "https://github.com/preston/cds-connect-authoring-tool",
+  "homepage": "https://github.com/HL7-Quality/cds-connect-authoring-tool",
   "license": "Apache-2.0",
   "dependencies": {
     "antlr4": "4.13.2",

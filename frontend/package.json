@@ -1,8 +1,8 @@
 {
   "name": "cds_authoring_tool",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "proxy": "http://localhost:3001",
-  "homepage": "https://cds.ahrq.gov/authoring",
+  "homepage": "https://github.com/HL7-Quality/cds-connect-authoring-tool",
   "license": "Apache-2.0",
   "dependencies": {
     "@emotion/react": "^11.14.0",
