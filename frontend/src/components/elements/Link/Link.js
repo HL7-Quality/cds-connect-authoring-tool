@@ -14,9 +14,10 @@ function onVisitExternalLink(e) {
     'trouble accessing this link, please disable your pop-up blocker.';
 
   // eslint-disable-next-line no-alert
-  if (!window.confirm(warning)) {
-    e.preventDefault();
-  }
+  // Permanently disabling browser warning for Community Edition
+  // if (!window.confirm(warning)) {
+  //   e.preventDefault();
+  // }
 }
 
 const Link = ({ external = false, download = false, href, sameTab = false, text }) => {
