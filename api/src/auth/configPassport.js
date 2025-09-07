@@ -41,7 +41,7 @@ function getLdapConfiguration(req, callback) {
   callback(null, ldapConfig);
 }
 
-function getLocalConfiguration(username, password, done, users = null) {
+function getLocalConfiguration(username, password, done, users) {
   findLocalUserById(
     username,
     (err, user) => {
