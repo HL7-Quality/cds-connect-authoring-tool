@@ -65,9 +65,11 @@ const UserGuide = () => {
           more.
         </div>
         <div>
-          This version of the CDS Authoring Tool is maintained by HL7 community stakeholders. The source code was originally part of the <a href="https://digital.ahrq.gov/health-it-tools-and-resources/clinical-decision-support-cds">CDS Connect</a> project,
-          sponsored by the Agency for Healthcare Research and Quality (AHRQ), and initially developed under contract
-          with AHRQ by MITRE's{' '}
+          This version of the CDS Authoring Tool is maintained by HL7 community stakeholders. The source code was
+          originally part of the{' '}
+          <a href="https://digital.ahrq.gov/health-it-tools-and-resources/clinical-decision-support-cds">CDS Connect</a>
+          project, sponsored by the Agency for Healthcare Research and Quality (AHRQ), and initially developed under
+          contract with AHRQ by MITRE's{' '}
           <Link external href="https://www.mitre.org/our-impact/rd-centers/health-ffrdc" text={'Health FFRDC'} />. For
           an overview of CDS Connect and how the CDS Authoring Tool fits in to the CDS Connect lifecycle, watch the{' '}
           <Link

@@ -12,7 +12,6 @@ function onVisitExternalLink(e) {
   //   "the site or the products presented on the site. You will be subject to the destination site's privacy policy " +
   //   'when you leave the HHS site.\n\nPress "OK" to accept.\n\nNote: A new window is about to open. If you have ' +
   //   'trouble accessing this link, please disable your pop-up blocker.';
-
   // eslint-disable-next-line no-alert
   // Permanently disabling browser warning for Community Edition
   // if (!window.confirm(warning)) {
