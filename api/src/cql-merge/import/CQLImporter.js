@@ -1,7 +1,7 @@
 import { InputStream, CommonTokenStream } from 'antlr4';
-import { cqlVisitor } from './grammar-1.3/cqlVisitor.js';
-import { cqlLexer } from './grammar-1.3/cqlLexer.js';
-import { cqlParser } from './grammar-1.3/cqlParser.js';
+import cqlVisitor from './grammar-1.5/cqlVisitor.js';
+import cqlLexer from './grammar-1.5/cqlLexer.js';
+import cqlParser from './grammar-1.5/cqlParser.js';
 import { CQLLibrary } from './CQLLibrary.js';
 import { CQLLibraryGroup } from './CQLLibraryGroup.js';
 class CQLImporter extends cqlVisitor {
