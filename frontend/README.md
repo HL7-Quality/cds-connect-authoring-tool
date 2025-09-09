@@ -8,7 +8,7 @@ This version of the CDS Authoring Tool is developed by a community of HL7 stakeh
 
 ## Development Details
 
-This web frontend UI project provides is written in React. It was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Relevant files are in the `src/` filter. Refer to the Create React App [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) for guidance on features and how to perform common tasks.
+This web frontend UI project is written in React. It was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Relevant files are in the `src/` filter. Refer to the Create React App [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) for guidance on features and how to perform common tasks.
 
 To develop this project you must install the version of Node referenced in [the Dockerfile](../Dockerfile) , which will also install npm. On macOS, for example, this can be done through (recommended) [Node Version Manager](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) (NVM), Homebrew (brew), or manually, such as:
 
