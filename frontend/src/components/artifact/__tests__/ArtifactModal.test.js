@@ -74,16 +74,16 @@ describe('<ArtifactModal />', () => {
   });
 
   describe('modal title', () => {
-    it('displays Create New Artifact for new artifacts', async () => {
+    it('displays Create New Library for new artifacts', async () => {
       renderComponent();
 
-      expect(await screen.findByText('Create New Artifact')).toBeInTheDocument();
+      expect(await screen.findByText('Create New Library')).toBeInTheDocument();
     });
 
     it('displays Edit Artifact Details when editing an artifact', async () => {
       renderComponent({ artifactEditing: artifactMock });
 
-      expect(await screen.findByText('Edit Artifact Details')).toBeInTheDocument();
+      expect(await screen.findByText('Edit Library Details')).toBeInTheDocument();
     });
   });
 
