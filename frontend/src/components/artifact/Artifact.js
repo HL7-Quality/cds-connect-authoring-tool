@@ -100,7 +100,7 @@ const Artifact = () => {
           {/* )} */}
           <div className={styles.helpLink}>
             <Button color="primary" onClick={() => setShowModal(true)} startIcon={<AddIcon />} variant="contained">
-              Create New Artifact
+              Create New Library
             </Button>
             <HelpLink linkPath="documentation/userguide#Creating_and_Managing_Artifacts" showText />
           </div>
