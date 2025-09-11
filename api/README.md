@@ -110,9 +110,13 @@ npx migrate-mongo up
 
 ### Authentication
 
-This project uses [Passport](http://www.passportjs.org/) to authenticate users. By default, the project uses the [LDAP Authentication Strategy](https://github.com/vesse/passport-ldapauth).
+This project uses [Passport](http://www.passportjs.org/) to authenticate users. The project supports local authentication (most for development), OpenID Connect , and LDAP using the [LDAP Authentication Strategy](https://github.com/vesse/passport-ldapauth).
 
 For development purposes, the [Local Authentication Strategy](https://github.com/jaredhanson/passport-local) can be enabled via configuration. In order to do so, a `config/local-users.json` file must be created. For an example of the structure of this file, see `config/example-local-users.json`.
+
+An example OAuth configuration file in `config/example-oauth.json`
+ 
+When running 
 
 ### Run
 

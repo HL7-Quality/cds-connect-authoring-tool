@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import { Modal } from 'components/elements';
 import { onVisitExternalForm } from 'utils/handlers';
-import { loginUser, setAuthStatus } from 'actions/auth';
+import { loginUser, setAuthStatus, oauthLogin } from 'actions/auth';
 import useStyles from '../styles';
 
 const Login = () => {
@@ -44,6 +44,10 @@ const Login = () => {
     setPassword(event.target.value);
   }, []);
 
+  const handleOAuthLogin = useCallback(() => {
+    dispatch(oauthLogin());
+  }, [dispatch]);
+
   const WarningHelperText = () => (
     <>
       <ErrorOutlineOutlinedIcon fontSize="inherit" /> Please enter your username, not your email address.
@@ -59,6 +63,16 @@ const Login = () => {
         variant="outlined"
       >
         Login
+      </Button>
+      
+      <Button
+        className={styles.oauthButton}
+        onClick={handleOAuthLogin}
+        variant="contained"
+        color="primary"
+        style={{ marginLeft: '10px' }}
+      >
+        OAuth Login
       </Button>
 
       <Modal

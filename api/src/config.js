@@ -149,6 +149,63 @@ const config = convict({
         default: false,
         env: 'AUTH_LOCAL_ACTIVE'
       }
+    },
+    oauth: {
+      active: {
+        doc: 'Indicates if the OAuth/OpenID Connect authentication strategy should be used',
+        format: 'Boolean',
+        default: false,
+        env: 'AUTH_OAUTH_ACTIVE'
+      },
+      clientID: {
+        doc: 'The OAuth client ID',
+        format: 'String',
+        default: '',
+        env: 'AUTH_OAUTH_CLIENT_ID'
+      },
+      clientSecret: {
+        doc: 'The OAuth client secret',
+        format: 'String',
+        default: '',
+        env: 'AUTH_OAUTH_CLIENT_SECRET',
+        sensitive: true
+      },
+      issuerURL: {
+        doc: 'The OAuth issuer URL (e.g., https://accounts.google.com)',
+        format: 'String',
+        default: '',
+        env: 'AUTH_OAUTH_ISSUER_URL'
+      },
+      authorizationURL: {
+        doc: 'The OAuth authorization URL',
+        format: 'String',
+        default: '',
+        env: 'AUTH_OAUTH_AUTHORIZATION_URL'
+      },
+      tokenURL: {
+        doc: 'The OAuth token URL',
+        format: 'String',
+        default: '',
+        env: 'AUTH_OAUTH_TOKEN_URL'
+      },
+      userInfoURL: {
+        doc: 'The OAuth user info URL',
+        format: 'String',
+        default: '',
+        env: 'AUTH_OAUTH_USER_INFO_URL'
+      },
+      scope: {
+        doc: 'The OAuth scope (space-separated)',
+        format: 'String',
+        default: 'openid profile email',
+        env: 'AUTH_OAUTH_SCOPE'
+      },
+      callbackURL: {
+        doc: 'The OAuth callback URL',
+        format: laxUrl('http', 'https'),
+        default: 'http://localhost:3001/authoring/api/auth/oauth/callback',
+        env: 'AUTH_OAUTH_CALLBACK_URL'
+      }
     }
   },
   tlsRejectUnauthorized: {

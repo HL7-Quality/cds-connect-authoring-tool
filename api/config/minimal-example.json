@@ -12,6 +12,9 @@
     },
     "local": {
       "active": true
+    },
+    "oauth": {
+      "active": false
     }
   }
 }

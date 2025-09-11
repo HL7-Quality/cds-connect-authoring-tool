@@ -8,6 +8,7 @@ import MongoStore from 'connect-mongo';
 import _ from 'lodash';
 import config from '../config.js';
 import { findByUsername as findLocalUserById } from './localAuthUsers.js';
+import { createOAuthStrategy } from './oauthStrategy.js';
 
 function getLdapConfiguration(req, callback) {
   // Replace {{username}} and {{password}} with values from request
@@ -84,6 +85,14 @@ export default app => {
   // Configure authentication using Passport Local Strategy - enabled based on configuration
   if (config.get('auth.local.active')) {
     passport.use(new LocalStrategy.Strategy(getLocalConfiguration));
+  }
+
+  // Configure authentication using Passport OAuth/OpenID Connect Strategy - enabled based on configuration
+  if (config.get('auth.oauth.active')) {
+    const oauthStrategy = createOAuthStrategy();
+    if (oauthStrategy) {
+      passport.use('oauth', oauthStrategy);
+    }
   }
 
   app.use(passport.initialize());

@@ -193,3 +193,10 @@ export function updateSettings(settings) {
       .catch(error => dispatch(updateUserSettingsFailure(error)));
   };
 }
+
+// ------------------------- OAUTH LOGIN ------------------------------------ //
+
+export function oauthLogin() {
+  // Redirect to the OAuth login endpoint
+  window.location.href = `${API_BASE}/auth/oauth`;
+}
