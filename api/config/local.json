@@ -22,6 +22,17 @@
     },
     "local": {
       "active": true
+    },
+    "oauth": {
+      "active": false,
+      "clientID": "cds-connect",
+      "clientSecret": "hdAWJ4yBwewSBThB3pf5YUPvtYW9Qu27",
+      "issuerURL": "https://localhost:8543",
+      "authorizationURL": "https://localhost:8543/realms/master/protocol/openid-connect/auth",
+      "tokenURL": "https://localhost:8543/realms/master/protocol/openid-connect/token",
+      "userInfoURL": "https://localhost:8543/realms/master/protocol/openid-connect/userinfo",
+      "scope": "openid profile email",
+      "callbackURL": "http://localhost:3001/authoring/api/auth/oauth/callback"
     }
   },
   "foreSee": {
@@ -29,4 +40,3 @@
   },
   "tlsRejectUnauthorized": "1"
 }
-

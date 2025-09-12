@@ -57,15 +57,21 @@ function currentUser(req, res) {
 }
 
 function oauthLogin(req, res, next) {
+  console.log('OAuth login attempt');
+  console.log('OAuth active:', config.get('auth.oauth.active'));
+  
   if (!config.get('auth.oauth.active')) {
+    console.log('OAuth is not active, sending unauthorized');
     return sendUnauthorized(res);
   }
 
   // If the user is already logged in, log out first
   if (req.user) {
+    console.log('User already logged in, logging out first');
     req.logout(function () {});
   }
 
+  console.log('Starting OAuth authentication');
   passport.authenticate('oauth')(req, res, next);
 }
 

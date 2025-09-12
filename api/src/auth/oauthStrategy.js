@@ -4,7 +4,10 @@ import config from '../config.js';
 function getOAuthConfiguration() {
   const oauthConfig = config.get('auth.oauth');
   
+  console.log('OAuth Config:', JSON.stringify(oauthConfig, null, 2));
+  
   if (!oauthConfig.active) {
+    console.log('OAuth is not active');
     return null;
   }
 
@@ -16,6 +19,8 @@ function getOAuthConfiguration() {
     console.error(`OAuth configuration missing required fields: ${missingFields.join(', ')}`);
     return null;
   }
+
+  console.log('OAuth configuration is valid');
 
   return {
     issuerURL: oauthConfig.issuerURL,
