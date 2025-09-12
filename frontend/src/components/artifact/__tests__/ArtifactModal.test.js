@@ -88,7 +88,7 @@ describe('<ArtifactModal />', () => {
   });
 
   // Temporarily skipping CPG fields - these were removed but we should still test the form
-  describe.disabled('cpg fields', () => {
+  describe.skip('cpg fields', () => {
     it('toggles the CPG tag when the field is filled out', async () => {
       renderComponent();
 
